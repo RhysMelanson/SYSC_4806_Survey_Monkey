@@ -6,10 +6,7 @@
 </head>
 <body>
 <h1>Result</h1>
-<p th:text="'id: ' + ${buddy.id}" />
-<p th:text="'name: ' + ${buddy.name}" />
-<p th:text="'address: ' + ${buddy.address}" />
-<p th:text="'phone number: ' + ${buddy.number}" />
-<a href="/buddy">Submit another message</a>
+<p th:text="'Question: ' + ${questionInfo.question}" />
+<a href="/question">Add another question</a>
 </body>
 </html>

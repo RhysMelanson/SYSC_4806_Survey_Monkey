@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class BuddyController {
+public class SurveyController {
 
-    @GetMapping("/buddy")
+    @GetMapping("/question")
     public String greetingForm(Model model) {
-        model.addAttribute("buddy1", new BuddyInfo());
-        return "buddy";
+        model.addAttribute("question1", new QuestionInfo());
+        return "question";
     }
 
-    @PostMapping("/buddy")
-    public String greetingSubmit(@ModelAttribute BuddyInfo buddy, Model model) {
-        model.addAttribute("buddy", buddy);
+    @PostMapping("/question")
+    public String greetingSubmit(@ModelAttribute QuestionInfo questionInfo, Model model) {
+        model.addAttribute("questionInfo", questionInfo);
 //        model.save();
         return "result";
     }
