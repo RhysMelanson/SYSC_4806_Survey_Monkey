@@ -11,15 +11,17 @@ public class Survey {
     @GeneratedValue
     private long id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<QuestionInfo> survey;
+    private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
+    private List<QuestionInfo> questionInfos;
 
     public Survey() {
-        survey = new ArrayList<QuestionInfo>();
+        questionInfos = new ArrayList<QuestionInfo>();
     }
 
-    public Survey(List<QuestionInfo> survey) {
-        this.survey = survey;
+    public Survey(List<QuestionInfo> questionInfos) {
+        this.questionInfos = questionInfos;
     }
 
     public long getId() {
@@ -30,31 +32,39 @@ public class Survey {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void addQuestionInfo(QuestionInfo questionInfo) {
-        survey.add(questionInfo);
+        questionInfos.add(questionInfo);
     }
 
-    public List<QuestionInfo> getSurvey() {
-        return survey;
+    public List<QuestionInfo> getQuestionInfos() {
+        return questionInfos;
     }
 
-    public void setSurvey(List<QuestionInfo> survey) {
-        this.survey = survey;
+    public void setQuestionInfos(List<QuestionInfo> survey) {
+        this.questionInfos = survey;
     }
 
     public QuestionInfo getQuestionInfo(int index) {
-        return survey.get(index);
+        return questionInfos.get(index);
     }
 
     public void removeQuestionInfo(int index) {
-        survey.remove(index);
+        questionInfos.remove(index);
     }
 
     @Override
     public String toString() {
-        String s =  "Survey: \n";
+        String s =  name + " : \n";
         int i = 0;
-        for(QuestionInfo questionInfo: survey) {
+        for(QuestionInfo questionInfo: questionInfos) {
             i++;
             s += i + " | " + questionInfo + '\n';
         }

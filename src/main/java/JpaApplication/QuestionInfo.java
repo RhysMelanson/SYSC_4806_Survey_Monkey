@@ -3,6 +3,7 @@ package JpaApplication;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class QuestionInfo {
@@ -13,6 +14,9 @@ public class QuestionInfo {
 
     private String question = "";
     private String answer = "";
+
+    @ManyToOne
+    private Survey survey;
 
     public QuestionInfo(){}
 
@@ -36,11 +40,11 @@ public class QuestionInfo {
         return answer;
     }
 
-    public void setName(String question) {
+    public void setQuestion(String question) {
         this.question = question;
     }
 
-    public void setAddress(String answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 

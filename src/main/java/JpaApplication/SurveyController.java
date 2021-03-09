@@ -17,7 +17,7 @@ public class SurveyController {
 
     @PostMapping("/question")
     public String greetingSubmit(@ModelAttribute QuestionInfo questionInfo, Model model) {
-        model.addAttribute("question", questionInfo);
+        model.addAttribute("questionInfo", questionInfo);
 //        model.save();
         return "result";
     }
