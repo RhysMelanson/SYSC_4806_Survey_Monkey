@@ -5,6 +5,4 @@ jdk:
 deploy:
   provider: heroku
   api-key: $HEROKU_API_KEY
-  app: addressbook-buddyinfo
-  on:
-    branch: main
+  app: SYSC_4806_Survey_Monkey
