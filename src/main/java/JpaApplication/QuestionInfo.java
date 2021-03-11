@@ -50,7 +50,7 @@ public class QuestionInfo {
 
     @Override
     public String toString() {
-        String s = "Then answer to the Question: " + question + "is: \n" + answer;
+        String s = "The answer to the Question: " + question + " is: \n" + answer;
         return s;
     }
 }
