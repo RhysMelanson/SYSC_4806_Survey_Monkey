@@ -6,3 +6,4 @@ Travis CI link: https://www.travis-ci.com/github/RhysMelanson/SYSC_4806_Survey_M
 
 Heroku App: https://mini-survey-monkey.herokuapp.com/
 
+Jira Board: https://minisurveymonkey.atlassian.net/jira/software/projects/MSM/boards/1
