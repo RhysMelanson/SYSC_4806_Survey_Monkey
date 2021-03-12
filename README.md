@@ -6,4 +6,3 @@ Travis CI link: https://www.travis-ci.com/github/RhysMelanson/SYSC_4806_Survey_M
 
 Heroku App: https://mini-survey-monkey.herokuapp.com/
 
-Heroku App: https://addressbook-buddyinfo.herokuapp.com/
