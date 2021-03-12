@@ -6,5 +6,4 @@ deploy:
   provider: heroku
   api-key: $HEROKU_API_KEY
   app: mini-survey-monkey
-  on:
-    branch: main
+
