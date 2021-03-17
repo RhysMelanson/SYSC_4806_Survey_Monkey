@@ -6,22 +6,22 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class QuestionInfo {
+public class Question {
 
     @Id
     @GeneratedValue
     private long id;
 
-    private String question = "";
+    private String questions = "";
     private String answer = "";
 
     @ManyToOne
     private Survey survey;
 
-    public QuestionInfo(){}
+    public Question(){}
 
-    public QuestionInfo(String question) {
-        this.question = question;
+    public Question(String questions) {
+        this.questions = questions;
     }
 
     public long getId() {
@@ -32,16 +32,16 @@ public class QuestionInfo {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestions() {
+        return questions;
     }
 
     public String getAnswer() {
         return answer;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestions(String questions) {
+        this.questions = questions;
     }
 
     public void setAnswer(String answer) {
@@ -50,7 +50,6 @@ public class QuestionInfo {
 
     @Override
     public String toString() {
-        String s = "The answer to the Question: " + question + " is: \n" + answer;
-        return s;
+        return "The answer to the Question: " + questions + " is: \n" + answer;
     }
 }
