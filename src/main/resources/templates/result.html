@@ -6,7 +6,8 @@
 </head>
 <body>
 <h1>Result</h1>
-<p th:text="'Question: ' + ${questionInfo.question}" />
-<a href="/question">Add another question</a>
+<p th:text="'Question: ' + ${question.questions}" />
+<p th:text="'id: ' + ${question.id}" />
+<a href="/addQuestion">Add another question</a>
 </body>
 </html>

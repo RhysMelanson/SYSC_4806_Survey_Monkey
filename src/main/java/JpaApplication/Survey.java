@@ -14,14 +14,14 @@ public class Survey {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
-    private List<QuestionInfo> questionInfos;
+    private List<Question> questions;
 
     public Survey() {
-        questionInfos = new ArrayList<QuestionInfo>();
+        questions = new ArrayList<Question>();
     }
 
-    public Survey(List<QuestionInfo> questionInfos) {
-        this.questionInfos = questionInfos;
+    public Survey(List<Question> questions) {
+        this.questions = questions;
     }
 
     public long getId() {
@@ -40,33 +40,33 @@ public class Survey {
         this.name = name;
     }
 
-    public void addQuestionInfo(QuestionInfo questionInfo) {
-        questionInfos.add(questionInfo);
+    public void addQuestionInfo(Question question) {
+        questions.add(question);
     }
 
-    public List<QuestionInfo> getQuestionInfos() {
-        return questionInfos;
+    public List<Question> getQuestionInfos() {
+        return questions;
     }
 
-    public void setQuestionInfos(List<QuestionInfo> survey) {
-        this.questionInfos = survey;
+    public void setQuestionInfos(List<Question> survey) {
+        this.questions = survey;
     }
 
-    public QuestionInfo getQuestionInfo(int index) {
-        return questionInfos.get(index);
+    public Question getQuestionInfo(int index) {
+        return questions.get(index);
     }
 
     public void removeQuestionInfo(int index) {
-        questionInfos.remove(index);
+        questions.remove(index);
     }
 
     @Override
     public String toString() {
         String s =  name + " : \n";
         int i = 0;
-        for(QuestionInfo questionInfo: questionInfos) {
+        for(Question question : questions) {
             i++;
-            s += i + " | " + questionInfo + '\n';
+            s += i + " | " + question + '\n';
         }
         return s;
     }

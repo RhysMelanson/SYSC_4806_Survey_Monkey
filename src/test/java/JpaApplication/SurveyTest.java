@@ -22,8 +22,8 @@ public class SurveyTest {
     @Test
     public void testGetQuestionInfo()
     {
-        QuestionInfo qi = new QuestionInfo("What is 2+2?");
-        List<QuestionInfo> infos = new ArrayList<QuestionInfo>();
+        Question qi = new Question("What is 2+2?");
+        List<Question> infos = new ArrayList<Question>();
         infos.add(qi);
         Survey s = new Survey(infos);
         assertEquals(qi, s.getQuestionInfo(0));
@@ -32,16 +32,16 @@ public class SurveyTest {
     public void testAddQuestionInfo()
     {
         Survey s = new Survey();
-        QuestionInfo qi = new QuestionInfo("What is 2+2?");
+        Question qi = new Question("What is 2+2?");
         s.addQuestionInfo(qi);
         assertEquals(qi, s.getQuestionInfo(0));
     }
     @Test
     public void testGetQuestionInfos1()
     {
-        QuestionInfo qi = new QuestionInfo("What is 2+2?");
-        QuestionInfo qi2 = new QuestionInfo("What is 3+3?");
-        List<QuestionInfo> infos = new ArrayList<QuestionInfo>();
+        Question qi = new Question("What is 2+2?");
+        Question qi2 = new Question("What is 3+3?");
+        List<Question> infos = new ArrayList<Question>();
         infos.add(qi);
         infos.add(qi2);
         Survey s = new Survey(infos);
@@ -50,9 +50,9 @@ public class SurveyTest {
     @Test
     public void testGetQuestionInfos2()
     {
-        QuestionInfo qi = new QuestionInfo("What is 2+2?");
-        QuestionInfo qi2 = new QuestionInfo("What is 3+3?");
-        List<QuestionInfo> infos = new ArrayList<QuestionInfo>();
+        Question qi = new Question("What is 2+2?");
+        Question qi2 = new Question("What is 3+3?");
+        List<Question> infos = new ArrayList<Question>();
         infos.add(qi);
         infos.add(qi2);
         Survey s = new Survey();
@@ -63,9 +63,9 @@ public class SurveyTest {
     @Test
     public void testSetQuestionInfos()
     {
-        QuestionInfo qi = new QuestionInfo("What is 2+2?");
-        QuestionInfo qi2 = new QuestionInfo("What is 3+3?");
-        List<QuestionInfo> infos = new ArrayList<QuestionInfo>();
+        Question qi = new Question("What is 2+2?");
+        Question qi2 = new Question("What is 3+3?");
+        List<Question> infos = new ArrayList<Question>();
         infos.add(qi);
         infos.add(qi2);
         Survey s = new Survey();
@@ -75,9 +75,9 @@ public class SurveyTest {
     @Test
     public void testRemoveQuestionInfo()
     {
-        QuestionInfo qi = new QuestionInfo("What is 2+2?");
-        QuestionInfo qi2 = new QuestionInfo("What is 3+3?");
-        List<QuestionInfo> infos = new ArrayList<QuestionInfo>();
+        Question qi = new Question("What is 2+2?");
+        Question qi2 = new Question("What is 3+3?");
+        List<Question> infos = new ArrayList<Question>();
         infos.add(qi);
         infos.add(qi2);
         Survey s = new Survey();
