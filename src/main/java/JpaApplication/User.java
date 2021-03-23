@@ -20,11 +20,11 @@ public class User{
     {
         this.userName = userName;
     }
-    public User(String userName, String userPass)
+    /*public User(String userName, String userPass)
     {
         this.userName = userName;
         this.userPass = userPass;
-    }
+    }*/
 
     public void setUserName(String userName)
     {
