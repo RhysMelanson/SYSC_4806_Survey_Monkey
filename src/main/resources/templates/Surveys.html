@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Available Surveys</title>
+</head>
+<body>
+<h1>Surveys</h1>
+<table>
+    <thead>
+    <tr>
+        <th> Title </th>
+        <th> ID </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${Surveys.empty}">
+        <td colspan="2"> No Surveys Available </td>
+    </tr>
+    <tr th:each="Survey : ${Surveys}">
+        <td><span th:text="${Survey.name}"> Title </span></td>
+        <td><span th:text="${Survey.id}"> ID </span></td>
+        <td><form action="#" th:action="@{/Surveys}" th:object="${Survey}" method="post">
+            <p><input type="submit" value="Select" /> </p>
+        </form></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
