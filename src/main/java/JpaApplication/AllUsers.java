@@ -34,7 +34,7 @@ public class AllUsers {
     {
         for(int i = 0;i<Users.size();i++)
         {
-            if (user.getUserName() == Users.get(i).getUserName()
+            if (user.getUserName() == Users.get(i).getUserName())
             {
                 System.out.println("Username already in use");
                 return;
@@ -51,7 +51,7 @@ public class AllUsers {
     {
         for(int i = 0;i<Users.size();i++)
         {
-            if (userName == Users.get(i).getUserName()
+            if (userName == Users.get(i).getUserName())
             {
                 return Users.get(i);
             }
@@ -63,7 +63,7 @@ public class AllUsers {
     {
         for(int i = 0;i<Users.size();i++)
         {
-            if (userName == Users.get(i).getUserName()
+            if (userName == Users.get(i).getUserName())
             {
                 return true;
             }
