@@ -1,4 +1,4 @@
-package JpaApplication
+package JpaApplication;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
