@@ -32,4 +32,33 @@ public class SurveyController {
         return "result";
     }
 
+    @GetMapping("/Surveys")
+    public String SurveyList(Model model) {
+
+        Survey test = new Survey();
+        test.setName("How much work do you do?");
+        Survey test2 = new Survey();
+        test2.setName("What your favorite ice cream?");
+
+
+        SurveyRepo.save(test);
+        SurveyRepo.save(test2);
+
+        model.addAttribute("Surveys", SurveyRepo.findAll());
+
+        return "Surveys";
+    }
+
+    @PostMapping("/Surveys")
+    public String SurveyListing(@ModelAttribute Survey sur, Model model) {
+        System.out.println(sur.getId());
+        model.addAttribute("questionInfo", new Question());
+
+        //QuestionRepo.save(questionInfo);
+//        model.save();
+        return "result";
+    }
+
+
+
 }
