@@ -17,7 +17,7 @@ public class AllUsers {
     public AllUsers() {
         Users = new ArrayList<User>();
     }
-    public AllUsers(List<User> users){
+    public AllUsers(ArrayList<User> users){
         this.Users = users;
     }
 
@@ -59,5 +59,9 @@ public class AllUsers {
             return true;
         }
         return false;
+    }
+    public List<User> getUsers()
+    {
+        return this.Users;
     }
 }
