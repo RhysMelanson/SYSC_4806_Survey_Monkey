@@ -25,10 +25,16 @@ public class SurveyController {
 
     @PostMapping("/addQuestion")
     public String addQuestionSubmit(@ModelAttribute Question question, Model model) {
+        System.out.println("here");
         model.addAttribute("question", question);
+//        Answer answer = new Answer("answer");
+//        question.addAnswer(answer);
+//
+//        QuestionRepo.save(question);
+//
+//        Question q1 = QuestionRepo.findByQuestion(question.getQuestion());
+//        System.out.println(q1);
 
-        QuestionRepo.save(question);
-//        model.save();
         return "result";
     }
 

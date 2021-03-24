@@ -13,31 +13,38 @@ public class QuestionTest {
     @Test
     public void testGetQuestion(){
         Question qi = new Question("What colour is the sky?");
-        assertEquals("What colour is the sky?", qi.getQuestions());
+        assertEquals("What colour is the sky?", qi.getQuestion());
     }
     @Test
     public void testSetQuestion1(){
         Question qi = new Question();
-        qi.setQuestions("What is 2+2?");
-        assertEquals("What is 2+2?", qi.getQuestions());
+        qi.setQuestion("What is 2+2?");
+        assertEquals("What is 2+2?", qi.getQuestion());
     }
     @Test
     public void testSetQuestion2(){
         Question qi = new Question("What colour is the sky?");
-        qi.setQuestions("What is 2+2?");
-        assertEquals("What is 2+2?", qi.getQuestions());
+        qi.setQuestion("What is 2+2?");
+        assertEquals("What is 2+2?", qi.getQuestion());
     }
     @Test
     public void testAnswer(){
         Question qi = new Question("What colour is the sky?");
-        qi.setAnswer("Blue");
-        assertEquals("Blue", qi.getAnswer());
+        qi.setAnswersByType("");
+        Answer ans = new Answer("Blue");
+        qi.addAnswer(ans);
+        assertEquals("Blue", qi.getAnswer(0).toString());
     }
     @Test
     public void testToString(){
         Question qi = new Question("What colour is the sky?");
-        qi.setAnswer("Blue");
-        assertEquals("The answer to the Question: What colour is the sky? is: \nBlue", qi.toString());
+        qi.setAnswersByType("");
+        Answer ans = new Answer("Blue");
+        qi.addAnswer(ans);
+        Answer ans1 = new Answer("Blue");
+        qi.addAnswer(ans1);
+        assertEquals("The answer to the Question: What colour is the sky? is:[\n" +
+                "Blue, \n" + "Blue]", qi.toString());
     }
 
 }
