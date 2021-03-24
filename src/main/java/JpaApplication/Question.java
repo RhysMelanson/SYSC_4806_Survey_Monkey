@@ -19,10 +19,13 @@ public class Question {
     @ManyToOne
     private Survey survey;
 
-    public Question(){}
+    public Question(){
+        answers = new ArrayList<Answer>();
+    }
 
     public Question(String question) {
         this.questions = question;
+        answers = new ArrayList<Answer>();
     }
 
     public Question(String question, List<Answer> answers) {
