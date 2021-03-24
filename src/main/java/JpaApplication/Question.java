@@ -1,9 +1,8 @@
 package JpaApplication;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Question {
@@ -13,15 +12,54 @@ public class Question {
     private long id;
 
     private String questions = "";
-    private String answer = "";
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
+    private List<Answer> answers;
 
     @ManyToOne
     private Survey survey;
 
-    public Question(){}
+    public Question(){
+        answers = new ArrayList<Answer>();
+    }
 
-    public Question(String questions) {
-        this.questions = questions;
+    public Question(String question) {
+        this.questions = question;
+        answers = new ArrayList<Answer>();
+    }
+
+    public Question(String question, List<Answer> answers) {
+        this.questions = question;
+        this.answers = answers;
+    }
+
+    public void addAnswer(Answer answer) {
+        answers.add(answer);
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+
+    public void setAnswersByType(String type) {
+        if(type.equals("Open-Ended")) {
+            answers = new ArrayList<Answer>();
+        }else {
+            answers = new ArrayList<Answer>();
+        }
+    }
+
+    public Answer getAnswer(int index) {
+        return answers.get(index);
+    }
+
+    public void removeAnswer(int index) {
+        answers.remove(index);
     }
 
     public long getId() {
@@ -36,20 +74,18 @@ public class Question {
         return questions;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setQuestions(String questions) {
-        this.questions = questions;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setQuestions(String question) {
+        this.questions = question;
     }
 
     @Override
     public String toString() {
-        return "The answer to the Question: " + questions + " is: \n" + answer;
+        String s =  questions + " : \n";
+        int i = 0;
+        for(Answer answer : answers) {
+            i++;
+            s += i + " | " + answer + '\n';
+        }
+        return s;
     }
 }

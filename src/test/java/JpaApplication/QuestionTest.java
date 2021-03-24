@@ -30,14 +30,20 @@ public class QuestionTest {
     @Test
     public void testAnswer(){
         Question qi = new Question("What colour is the sky?");
-        qi.setAnswer("Blue");
-        assertEquals("Blue", qi.getAnswer());
+        qi.setAnswersByType("");
+        Answer ans = new Answer("Blue");
+        qi.addAnswer(ans);
+        assertEquals("Blue", qi.getAnswer(0).toString());
     }
     @Test
     public void testToString(){
         Question qi = new Question("What colour is the sky?");
-        qi.setAnswer("Blue");
-        assertEquals("The answer to the Question: What colour is the sky? is: \nBlue", qi.toString());
+        qi.setAnswersByType("");
+        Answer ans = new Answer("Blue");
+        qi.addAnswer(ans);
+        Answer ans1 = new Answer("Blue");
+        qi.addAnswer(ans1);
+        assertEquals("What colour is the sky? : \n" + "1 | Blue\n" + "2 | Blue\n", qi.toString());
     }
 
 }
