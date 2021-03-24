@@ -1,5 +1,3 @@
-package JpaApplication;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.*;
@@ -16,9 +14,10 @@ public class AllUsersTest {
     public void testGetUsers()
     {
         AllUsers users = new AllUsers();
-        users.addUser(new User("testName"));
+        User testUser = new User("testName");
+        users.addUser(testUser);
         ArrayList<User> userList = new ArrayList<User>();
-        userList.add(new User("testName"));
+        userList.add(testUser);
         assertEquals(userList, users.getUsers());
     }
     @Test
@@ -57,14 +56,15 @@ public class AllUsersTest {
     public void testFindUserTrue()
     {
         AllUsers users = new AllUsers();
-        users.addUser(new User("testName"));
-        assertEquals(new User("testName"), users.findUser("testName"));
+        User testUser = new User("testName");
+        users.addUser(testUser);
+        assertEquals(testUser, users.findUser("testName"));
     }
     @Test
     public void testFindUserFalse()
     {
         AllUsers users = new AllUsers();
-        assertEquals(new User(""), users.findUser("testName"));
+        assertEquals("", users.findUser("testName").getUserName());
     }
     @Test
     public void testLoginTrue()
