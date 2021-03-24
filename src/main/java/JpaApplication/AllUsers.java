@@ -17,7 +17,7 @@ public class AllUsers {
     public AllUsers() {
         Users = new ArrayList<User>();
     }
-    public AllUsers(List<User> users){
+    public AllUsers(ArrayList<User> users){
         this.Users = users;
     }
 
@@ -32,10 +32,13 @@ public class AllUsers {
 
     public void addUser(User user)
     {
-        if(Users.contains(new User(user.getUserName())))
+        for(int i = 0;i<Users.size();i++)
         {
-            System.out.println("Username already in use");
-            return;
+            if (user.getUserName() == Users.get(i).getUserName())
+            {
+                System.out.println("Username already in use");
+                return;
+            }
         }
         this.Users.add(user);
     }
@@ -43,21 +46,32 @@ public class AllUsers {
     {
         this.Users.remove(index);
     }
+
     public User findUser(String userName)
     {
-        if(Users.contains(new User(userName)))
+        for(int i = 0;i<Users.size();i++)
         {
-            return Users.get(Users.indexOf(new User(userName)));
+            if (userName == Users.get(i).getUserName())
+            {
+                return Users.get(i);
+            }
         }
         return new User("");
     }
 
     public boolean login(String userName)
     {
-        if(Users.contains(new User(userName)))
+        for(int i = 0;i<Users.size();i++)
         {
-            return true;
+            if (userName == Users.get(i).getUserName())
+            {
+                return true;
+            }
         }
         return false;
+    }
+    public List<User> getUsers()
+    {
+        return this.Users;
     }
 }
