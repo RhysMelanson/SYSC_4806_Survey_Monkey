@@ -77,6 +77,12 @@ public class Question {
 
     @Override
     public String toString() {
-        return "The answer to the Question: " + questions + " is:" + answers;
+        String s =  questions + " : \n";
+        int i = 0;
+        for(Answer answer : answers) {
+            i++;
+            s += i + " | " + answer + '\n';
+        }
+        return s;
     }
 }

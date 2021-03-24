@@ -43,8 +43,7 @@ public class QuestionTest {
         qi.addAnswer(ans);
         Answer ans1 = new Answer("Blue");
         qi.addAnswer(ans1);
-        assertEquals("The answer to the Question: What colour is the sky? is:[\n" +
-                "Blue, \n" + "Blue]", qi.toString());
+        assertEquals("What colour is the sky? : \n" + "1 | Blue\n" + "2 | Blue\n", qi.toString());
     }
 
 }
