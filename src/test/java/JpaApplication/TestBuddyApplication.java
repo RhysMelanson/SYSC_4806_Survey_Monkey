@@ -24,7 +24,7 @@ public class TestBuddyApplication {
 
     @Test
     public void shouldReturnDefaultMessage() throws Exception {
-        this.mockMvc.perform(get("/question")).andExpect(status().isOk())
+        this.mockMvc.perform(get("/addQuestion")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Question:")));
     }
 }

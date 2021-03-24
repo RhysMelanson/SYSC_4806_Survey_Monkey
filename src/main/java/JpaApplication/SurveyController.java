@@ -17,18 +17,17 @@ public class SurveyController {
     @Autowired
     private SurveyRepository SurveyRepo;
 
-    @GetMapping("/question")
-    public String greetingForm(Model model) {
-        model.addAttribute("question1", new QuestionInfo());
-
-        return "question";
+    @GetMapping("/addQuestion")
+    public String addQuestionForm(Model model) {
+        model.addAttribute("question", new Question());
+        return "addQuestion";
     }
 
-    @PostMapping("/question")
-    public String greetingSubmit(@ModelAttribute QuestionInfo questionInfo, Model model) {
-        model.addAttribute("questionInfo", questionInfo);
+    @PostMapping("/addQuestion")
+    public String addQuestionSubmit(@ModelAttribute Question question, Model model) {
+        model.addAttribute("question", question);
 
-        QuestionRepo.save(questionInfo);
+        QuestionRepo.save(question);
 //        model.save();
         return "result";
     }
