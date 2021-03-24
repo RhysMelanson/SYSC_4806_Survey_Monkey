@@ -13,19 +13,19 @@ public class QuestionTest {
     @Test
     public void testGetQuestion(){
         Question qi = new Question("What colour is the sky?");
-        assertEquals("What colour is the sky?", qi.getQuestion());
+        assertEquals("What colour is the sky?", qi.getQuestions());
     }
     @Test
     public void testSetQuestion1(){
         Question qi = new Question();
-        qi.setQuestion("What is 2+2?");
-        assertEquals("What is 2+2?", qi.getQuestion());
+        qi.setQuestions("What is 2+2?");
+        assertEquals("What is 2+2?", qi.getQuestions());
     }
     @Test
     public void testSetQuestion2(){
         Question qi = new Question("What colour is the sky?");
-        qi.setQuestion("What is 2+2?");
-        assertEquals("What is 2+2?", qi.getQuestion());
+        qi.setQuestions("What is 2+2?");
+        assertEquals("What is 2+2?", qi.getQuestions());
     }
     @Test
     public void testAnswer(){

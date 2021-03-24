@@ -11,7 +11,7 @@ public class Question {
     @GeneratedValue
     private long id;
 
-    private String question = "";
+    private String questions = "";
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
     private List<Answer> answers;
@@ -22,11 +22,11 @@ public class Question {
     public Question(){}
 
     public Question(String question) {
-        this.question = question;
+        this.questions = question;
     }
 
     public Question(String question, List<Answer> answers) {
-        this.question = question;
+        this.questions = question;
         this.answers = answers;
     }
 
@@ -67,16 +67,16 @@ public class Question {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestions() {
+        return questions;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestions(String question) {
+        this.questions = question;
     }
 
     @Override
     public String toString() {
-        return "The answer to the Question: " + question + " is:" + answers;
+        return "The answer to the Question: " + questions + " is:" + answers;
     }
 }
