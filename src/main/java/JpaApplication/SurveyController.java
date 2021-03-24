@@ -12,7 +12,7 @@ public class SurveyController {
 
 
     @Autowired
-    private QuestionInfoRepository QuestionRepo;
+    private QuestionRepository QuestionRepo;
 
     @Autowired
     private SurveyRepository SurveyRepo;
@@ -52,7 +52,7 @@ public class SurveyController {
     @PostMapping("/Surveys")
     public String SurveyListing(@ModelAttribute Survey sur, Model model) {
         System.out.println(sur.getId());
-        model.addAttribute("questionInfo", new QuestionInfo());
+        model.addAttribute("questionInfo", new Question());
 
         //QuestionRepo.save(questionInfo);
 //        model.save();
