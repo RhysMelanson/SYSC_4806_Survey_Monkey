@@ -2,8 +2,8 @@ package JpaApplication;
 
 import static org.junit.Assert.*;
 
-import JpaApplication.Model.Answer;
-import JpaApplication.Model.OpenEnded;
+import JpaApplication.Model.Answers.Answer;
+import JpaApplication.Model.Answers.OpenEnded;
 import JpaApplication.Model.Question;
 import org.junit.Test;
 

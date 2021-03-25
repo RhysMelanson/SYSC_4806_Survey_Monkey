@@ -1,7 +1,5 @@
 package JpaApplication.Model;
 
-import JpaApplication.Model.AllUsers;
-
 import javax.persistence.*;
 
 @Entity

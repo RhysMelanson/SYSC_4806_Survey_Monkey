@@ -1,4 +1,6 @@
-package JpaApplication.Model;
+package JpaApplication.Model.Answers;
+
+import JpaApplication.Model.Question;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,12 +26,12 @@ public abstract class Answer {
     public long getId() {
         return id;
     }
-//
-//    public String getAnswer() {
-//        return answer;
-//    }
-//
-//    public void setAnswer(String answer) {
-//        this.answer = answer;
-//    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

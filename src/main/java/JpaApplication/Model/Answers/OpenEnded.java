@@ -1,6 +1,4 @@
-package JpaApplication.Model;
-
-import JpaApplication.Model.Answer;
+package JpaApplication.Model.Answers;
 
 import javax.persistence.*;
 
@@ -11,7 +9,7 @@ public class OpenEnded extends Answer {
 //    @GeneratedValue
 //    private long id;
 
-    private String answer = "";
+//    private String answer = "";
 
 //    @ManyToOne
 //    private Question question;
@@ -29,14 +27,14 @@ public class OpenEnded extends Answer {
 //    public void setId(long id) {
 //        this.id = id;
 //    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+//
+//    public String getAnswer() {
+//        return answer;
+//    }
+//
+//    public void setAnswer(String answer) {
+//        this.answer = answer;
+//    }
 
     @Override
     public String toString() {
