@@ -6,6 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class SurveyController {
@@ -16,6 +20,8 @@ public class SurveyController {
 
     @Autowired
     private SurveyRepository SurveyRepo;
+
+
 
     @GetMapping("/addQuestion")
     public String addQuestionForm(Model model) {
@@ -51,20 +57,49 @@ public class SurveyController {
         SurveyRepo.save(test2);
 
         model.addAttribute("Surveys", SurveyRepo.findAll());
+        model.addAttribute("Survey", new Survey());
 
         return "Surveys";
     }
 
     @PostMapping("/Surveys")
-    public String SurveyListing(@ModelAttribute Survey sur, Model model) {
-        System.out.println(sur.getId());
-        model.addAttribute("questionInfo", new Question());
+    public String SurveyListing(@ModelAttribute String sur, Model model) {
+        System.out.println(sur + "k");
+
+        //model.addAttribute("questionInfo", new Question());
 
         //QuestionRepo.save(questionInfo);
 //        model.save();
-        return "result";
+        return "addQuestion";
     }
 
+    @GetMapping("/ViewAnswers")
+    public String ViewAnswer(Model model, Long ID) {
+        ID = new Long(1);
 
+        Optional<Long> optFoo = Optional.ofNullable( ID );
+        long longFoo = optFoo.orElse( -1L );
+
+
+
+        Question IHateMyLife = new Question("How are we doing today");
+        IHateMyLife.addAnswer(new Answer("Terrible"));
+        IHateMyLife.addAnswer(new Answer("Dieing on the inside"));
+        IHateMyLife.addAnswer(new Answer("Lost the will to live"));
+        Question IHateMyLife2 = new Question("How are we doing today");
+        IHateMyLife2.addAnswer(new Answer("Terrible2"));
+        IHateMyLife2.addAnswer(new Answer("Dieing on the inside2"));
+        IHateMyLife2.addAnswer(new Answer("Lost the will to live2"));
+        Survey test = new Survey();
+        test.setId(1);
+        test.addQuestionInfo(IHateMyLife);
+        test.addQuestionInfo(IHateMyLife2);
+        SurveyRepo.save(test);
+        Survey ChosenSurvey = SurveyRepo.findById(longFoo);
+        List<Question> quest = ChosenSurvey.getQuestionInfos();
+        model.addAttribute("Questions", quest);
+
+        return "ViewAnswers";
+    }
 
 }
