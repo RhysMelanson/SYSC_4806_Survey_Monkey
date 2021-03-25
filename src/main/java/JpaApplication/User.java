@@ -1,6 +1,7 @@
-package JpaApplication.Model;
+package JpaApplication;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class User{

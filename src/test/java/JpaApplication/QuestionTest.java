@@ -1,10 +1,6 @@
 package JpaApplication;
 
 import static org.junit.Assert.*;
-
-import JpaApplication.Model.Answers.Answer;
-import JpaApplication.Model.Answers.OpenEnded;
-import JpaApplication.Model.Question;
 import org.junit.Test;
 
 public class QuestionTest {
@@ -34,16 +30,18 @@ public class QuestionTest {
     @Test
     public void testAnswer(){
         Question qi = new Question("What colour is the sky?");
-        Answer ans = new OpenEnded("Blue");
+        qi.setAnswersByType("");
+        Answer ans = new Answer("Blue");
         qi.addAnswer(ans);
         assertEquals("Blue", qi.getAnswer(0).toString());
     }
     @Test
     public void testToString(){
         Question qi = new Question("What colour is the sky?");
-        Answer ans = new OpenEnded("Blue");
+        qi.setAnswersByType("");
+        Answer ans = new Answer("Blue");
         qi.addAnswer(ans);
-        Answer ans1 = new OpenEnded("Blue");
+        Answer ans1 = new Answer("Blue");
         qi.addAnswer(ans1);
         assertEquals("What colour is the sky? : \n" + "1 | Blue\n" + "2 | Blue\n", qi.toString());
     }
