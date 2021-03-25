@@ -1,9 +1,6 @@
 package JpaApplication;
 
 import static org.junit.Assert.*;
-
-import JpaApplication.Model.Question;
-import JpaApplication.Model.Survey;
 import org.junit.Test;
 import java.util.List;
 import java.util.ArrayList;
