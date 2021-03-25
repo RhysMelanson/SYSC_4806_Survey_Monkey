@@ -1,6 +1,8 @@
 package JpaApplication;
 
 import static org.junit.Assert.*;
+
+import JpaApplication.Model.User;
 import org.junit.Test;
 
 public class UserTest {

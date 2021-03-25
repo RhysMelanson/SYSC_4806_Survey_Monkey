@@ -1,4 +1,4 @@
-package JpaApplication;
+package JpaApplication.Model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class Question {
     private long id;
 
     private String questions = "";
+    private String questionType = "";
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
     private List<Answer> answers;
@@ -45,15 +46,6 @@ public class Question {
         this.answers = answers;
     }
 
-
-    public void setAnswersByType(String type) {
-        if(type.equals("Open-Ended")) {
-            answers = new ArrayList<Answer>();
-        }else {
-            answers = new ArrayList<Answer>();
-        }
-    }
-
     public Answer getAnswer(int index) {
         return answers.get(index);
     }
@@ -76,6 +68,14 @@ public class Question {
 
     public void setQuestions(String question) {
         this.questions = question;
+    }
+
+    public String getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
     }
 
     @Override
