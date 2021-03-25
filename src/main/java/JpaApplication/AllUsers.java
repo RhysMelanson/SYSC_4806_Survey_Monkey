@@ -1,6 +1,4 @@
-package JpaApplication.Model;
-
-import JpaApplication.Model.User;
+package JpaApplication;
 
 import javax.persistence.*;
 
