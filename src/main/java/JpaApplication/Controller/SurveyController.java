@@ -22,6 +22,12 @@ public class SurveyController {
     @Autowired
     private SurveyRepository SurveyRepo;
 
+    @GetMapping("/questionType")
+    public String chooseQuestionType(Model model) {
+        model.addAttribute("question", new Question());
+        return "questionType";
+    }
+
     @GetMapping("/addQuestion")
     public String addQuestionForm(Model model) {
         model.addAttribute("question", new Question());
@@ -31,14 +37,36 @@ public class SurveyController {
     @PostMapping("/addQuestion")
     public String addQuestionSubmit(@ModelAttribute Question question, Model model) {
         model.addAttribute("question", question);
-        Answer answer = new Answer("answer");
-        question.addAnswer(answer);
-//
+        question.setQuestionType(0);
         QuestionRepo.save(question);
+        return "result";
+    }
 
-        Question q1 = QuestionRepo.findByQuestions(question.getQuestions());
-        System.out.println(q1);
+    @GetMapping("/addMultipleChoices")
+    public String addMultipleChoicesForm(Model model) {
+        model.addAttribute("question", new Question());
+        return "addMultipleChoices";
+    }
 
+    @PostMapping("/addMultipleChoices")
+    public String addMultipleChoicesSubmit(@ModelAttribute Question question, Model model) {
+        model.addAttribute("question", question);
+        question.setQuestionType(1);
+        QuestionRepo.save(question);
+        return "result";
+    }
+
+    @GetMapping("/addNumberRange")
+    public String addNumberRangeForm(Model model) {
+        model.addAttribute("question", new Question());
+        return "addNumberRange";
+    }
+
+    @PostMapping("/addNumberRange")
+    public String addNumberRangeSubmit(@ModelAttribute Question question, Model model) {
+        model.addAttribute("question", question);
+        question.setQuestionType(2);
+        QuestionRepo.save(question);
         return "result";
     }
 
