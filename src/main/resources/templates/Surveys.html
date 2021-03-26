@@ -21,7 +21,7 @@
     <tr th:each="Survey : ${Surveys}">
         <td><span th:text="${Survey.name}"> Title </span></td>
         <td><span th:text="${Survey.id}"> ID </span></td>
-        <td><form action="" method="post">
+        <td><form action="" th:action="@{/ViewAnswers}" th:object="${Survey.id}">
             <input type="submit" name="upvote" value="Upvote" />
         </form></td>
     </tr>
