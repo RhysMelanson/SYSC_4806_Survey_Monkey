@@ -1,4 +1,4 @@
-package JpaApplication.Model.Answers;
+package JpaApplication.Model;
 
 import JpaApplication.Model.Question;
 
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public abstract class Answer {
+public class Answer {
 
     @Id
     @GeneratedValue
@@ -18,6 +18,12 @@ public abstract class Answer {
 
     @ManyToOne
     protected Question question;
+
+    public Answer() {}
+
+    public Answer(String answer) {
+        this.answer = answer;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -33,5 +39,10 @@ public abstract class Answer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return answer;
     }
 }

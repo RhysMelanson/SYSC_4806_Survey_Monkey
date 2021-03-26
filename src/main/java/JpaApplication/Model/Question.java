@@ -1,7 +1,5 @@
 package JpaApplication.Model;
 
-import JpaApplication.Model.Answers.Answer;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package JpaApplication.Repository;
 
-import JpaApplication.Model.Answers.Answer;
+import JpaApplication.Model.Answer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
