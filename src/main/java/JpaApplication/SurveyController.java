@@ -3,10 +3,7 @@ package JpaApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,27 +48,7 @@ public class SurveyController {
         test.setName("How much work do you do?");
         Survey test2 = new Survey();
         test2.setName("What your favorite ice cream?");
-
-
-        SurveyRepo.save(test);
-        SurveyRepo.save(test2);
-
-        model.addAttribute("Surveys", SurveyRepo.findAll());
-        model.addAttribute("Survey", new Survey());
-
-        return "Surveys";
-    }
-    
-
-    @GetMapping("/ViewAnswers")
-    public String ViewAnswer(Model model, Long ID) {
-        ID = new Long(1);
-
-        Optional<Long> optFoo = Optional.ofNullable( ID );
-        long longFoo = optFoo.orElse( -1L );
-
-
-
+        /*
         Question IHateMyLife = new Question("How are we doing today");
         IHateMyLife.addAnswer(new Answer("Terrible"));
         IHateMyLife.addAnswer(new Answer("Dieing on the inside"));
@@ -80,13 +57,42 @@ public class SurveyController {
         IHateMyLife2.addAnswer(new Answer("Terrible2"));
         IHateMyLife2.addAnswer(new Answer("Dieing on the inside2"));
         IHateMyLife2.addAnswer(new Answer("Lost the will to live2"));
-        Survey test = new Survey();
-        test.setId(1);
+        //Survey test3 = new Survey();
+        //test3.setName("How much do you hate your life?");
         test.addQuestionInfo(IHateMyLife);
         test.addQuestionInfo(IHateMyLife2);
+        //SurveyRepo.save(test3);
+
+
+*/
         SurveyRepo.save(test);
-        Survey ChosenSurvey = SurveyRepo.findById(longFoo);
+        SurveyRepo.save(test2);
+
+        model.addAttribute("Surveys", SurveyRepo.findAll());
+        model.addAttribute("Survey", new Survey());
+
+        return "Surveys";
+    }
+
+
+    @GetMapping("/ViewAnswers")
+    public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
+        //System.out.println(id);
+        long ID = Long.parseLong(id);
+
+
+
+
+
+
+        System.out.println(SurveyRepo.findAll());
+        Survey ChosenSurvey = SurveyRepo.findById(ID);
+        //System.out.println(ChosenSurvey);
+       // System.out.println(ChosenSurvey.getName());
+        //System.out.println(ChosenSurvey.getId());
+
         List<Question> quest = ChosenSurvey.getQuestionInfos();
+       System.out.println(quest);
         model.addAttribute("Questions", quest);
 
         return "ViewAnswers";
