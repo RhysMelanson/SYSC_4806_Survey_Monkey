@@ -68,6 +68,16 @@ public class SurveyController {
 //        model.save();
         return "result";
     }
+    
+    @GetMapping("/answerQuestions")
+    public String answerForm(Model model, Question question) {
+        model.addAttribute("question", new Question());
+        QuestionRepo.save(question);
+
+        Question q1 = QuestionRepo.findByQuestions(question.getQuestions());
+        System.out.println(q1);
+        return "answerQuestions";
+    }
 
 
 
