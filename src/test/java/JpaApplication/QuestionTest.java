@@ -1,6 +1,9 @@
 package JpaApplication;
 
 import static org.junit.Assert.*;
+
+import JpaApplication.Model.Answer;
+import JpaApplication.Model.Question;
 import org.junit.Test;
 
 public class QuestionTest {
@@ -30,7 +33,6 @@ public class QuestionTest {
     @Test
     public void testAnswer(){
         Question qi = new Question("What colour is the sky?");
-        qi.setAnswersByType("");
         Answer ans = new Answer("Blue");
         qi.addAnswer(ans);
         assertEquals("Blue", qi.getAnswer(0).toString());
@@ -38,7 +40,6 @@ public class QuestionTest {
     @Test
     public void testToString(){
         Question qi = new Question("What colour is the sky?");
-        qi.setAnswersByType("");
         Answer ans = new Answer("Blue");
         qi.addAnswer(ans);
         Answer ans1 = new Answer("Blue");

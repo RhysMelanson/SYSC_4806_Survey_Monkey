@@ -1,5 +1,7 @@
-package JpaApplication;
+package JpaApplication.Controller;
 
+import JpaApplication.Repository.AnswerRepository;
+import JpaApplication.Model.Answer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

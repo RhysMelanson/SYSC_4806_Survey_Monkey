@@ -1,4 +1,6 @@
-package JpaApplication;
+package JpaApplication.Model;
+
+import JpaApplication.Model.Question;
 
 import javax.persistence.*;
 import java.util.ArrayList;
