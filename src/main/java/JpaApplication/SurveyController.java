@@ -61,17 +61,7 @@ public class SurveyController {
 
         return "Surveys";
     }
-
-    @PostMapping("/Surveys")
-    public String SurveyListing(@ModelAttribute String sur, Model model) {
-        System.out.println(sur + "k");
-
-        //model.addAttribute("questionInfo", new Question());
-
-        //QuestionRepo.save(questionInfo);
-//        model.save();
-        return "addQuestion";
-    }
+    
 
     @GetMapping("/ViewAnswers")
     public String ViewAnswer(Model model, Long ID) {
