@@ -27,7 +27,6 @@ public class SurveyController {
     public String addQuestionSubmit(@ModelAttribute Question question, Model model) {
         model.addAttribute("question", question);
         Answer answer = new Answer("answer");
-        question.setAnswersByType("Open-Ended");
         question.addAnswer(answer);
 //
         QuestionRepo.save(question);
