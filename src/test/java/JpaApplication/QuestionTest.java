@@ -1,6 +1,9 @@
 package JpaApplication;
 
 import static org.junit.Assert.*;
+
+import JpaApplication.Model.Answer;
+import JpaApplication.Model.Question;
 import org.junit.Test;
 
 public class QuestionTest {

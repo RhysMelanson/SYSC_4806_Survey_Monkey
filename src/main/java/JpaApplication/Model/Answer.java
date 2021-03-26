@@ -1,4 +1,4 @@
-package JpaApplication;
+package JpaApplication.Model;
 
 import javax.persistence.*;
 

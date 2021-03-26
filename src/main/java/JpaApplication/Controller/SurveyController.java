@@ -1,5 +1,10 @@
-package JpaApplication;
+package JpaApplication.Controller;
 
+import JpaApplication.Model.Answer;
+import JpaApplication.Model.Question;
+import JpaApplication.Model.Survey;
+import JpaApplication.Repository.QuestionRepository;
+import JpaApplication.Repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
