@@ -6,10 +6,8 @@
 </head>
 <body>
 <h1>Result</h1>
-<p th:text="'id: ' + ${question.id}" />
 <p th:text="'Question: ' + ${question.questions}" />
-<p th:text="'Question Type: ' + ${question.typeToString()}" />
-<p><a href="/questionType">Add another question</a></p>
-<p><a href="/">To return to the HomePage click here</a></p>
+<p th:text="'id: ' + ${question.id}" />
+<a href="/addQuestion">Add another question</a>
 </body>
 </html>
