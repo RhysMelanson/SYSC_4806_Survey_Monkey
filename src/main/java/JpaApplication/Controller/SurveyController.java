@@ -8,10 +8,9 @@ import JpaApplication.Repository.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SurveyController {
@@ -23,12 +22,6 @@ public class SurveyController {
     @Autowired
     private SurveyRepository SurveyRepo;
 
-    @GetMapping("/questionType")
-    public String chooseQuestionType(Model model) {
-        model.addAttribute("question", new Question());
-        return "questionType";
-    }
-
     @GetMapping("/addQuestion")
     public String addQuestionForm(Model model) {
         model.addAttribute("question", new Question());
@@ -38,70 +31,42 @@ public class SurveyController {
     @PostMapping("/addQuestion")
     public String addQuestionSubmit(@ModelAttribute Question question, Model model) {
         model.addAttribute("question", question);
-        question.setQuestionType(0);
+        Answer answer = new Answer("answer");
+        question.addAnswer(answer);
+//
         QuestionRepo.save(question);
+
+        Question q1 = QuestionRepo.findByQuestions(question.getQuestions());
+        System.out.println(q1);
+
         return "result";
     }
 
-    @GetMapping("/addMultipleChoices")
-    public String addMultipleChoicesForm(Model model) {
-        model.addAttribute("question", new Question());
-        return "addMultipleChoices";
-    }
-
-    @PostMapping("/addMultipleChoices")
-    public String addMultipleChoicesSubmit(@ModelAttribute Question question, Model model) {
-        model.addAttribute("question", question);
-        question.setQuestionType(1);
-        QuestionRepo.save(question);
-        return "result";
-    }
-
-    @GetMapping("/addNumberRange")
-    public String addNumberRangeForm(Model model) {
-        model.addAttribute("question", new Question());
-        return "addNumberRange";
-    }
-    @PostMapping("/addNumberRange")
-    public String addNumberRangeSubmit(@ModelAttribute Question question, Model model) {
-        model.addAttribute("question", question);
-        question.setQuestionType(2);
-        QuestionRepo.save(question);
-        return "result";
-    }
     @GetMapping("/Surveys")
     public String SurveyList(Model model) {
 
-//       Survey test = new Survey();
-//       test.setName("How much work do you do?");
-//       Survey test2 = new Survey();
-//       test2.setName("What your favorite ice cream?");
-//        System.out.println(SurveyRepo.findAll());
-//       SurveyRepo.save(test);
-//        SurveyRepo.save(test2);
+        Survey test = new Survey();
+        test.setName("How much work do you do?");
+        Survey test2 = new Survey();
+        test2.setName("What your favorite ice cream?");
+
+
+        SurveyRepo.save(test);
+        SurveyRepo.save(test2);
 
         model.addAttribute("Surveys", SurveyRepo.findAll());
 
         return "Surveys";
     }
 
+    @PostMapping("/Surveys")
+    public String SurveyListing(@ModelAttribute Survey sur, Model model) {
+        System.out.println(sur.getId());
+        model.addAttribute("questionInfo", new Question());
 
-    @GetMapping("/ViewAnswers")
-    public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
-        //System.out.println(id);
-        long ID = Long.parseLong(id);
-
-        System.out.println(SurveyRepo.findAll());
-        Survey ChosenSurvey = SurveyRepo.findById(ID);
-        //System.out.println(ChosenSurvey);
-       // System.out.println(ChosenSurvey.getName());
-        //System.out.println(ChosenSurvey.getId());
-
-        List<Question> quest = ChosenSurvey.getQuestionInfos();
-        System.out.println(quest);
-        model.addAttribute("Questions", quest);
-
-        return "ViewAnswers";
+        //QuestionRepo.save(questionInfo);
+//        model.save();
+        return "result";
     }
     
     @GetMapping("/answerQuestions")
@@ -114,18 +79,6 @@ public class SurveyController {
         return "answerQuestions";
     }
 
-    @GetMapping("/newSurvey")
-    public String addSurvey(Model model){
-        model.addAttribute("survey", new Survey());
-        return "newSurvey";
-    }
 
-    @PostMapping("/newSurvey")
-    public String addSurvey(@ModelAttribute Survey survey, Model model){
-        model.addAttribute("survey", survey);
-        SurveyRepo.save(survey);
-        System.out.println(SurveyRepo.findAll());
-        return "questionType";
-    }
 
 }
