@@ -1,6 +1,7 @@
 package JpaApplication.Model;
 
 import JpaApplication.Model.Question;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Survey {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
+    @JsonManagedReference
     private List<Question> questions;
 
     public Survey() {
@@ -25,6 +27,7 @@ public class Survey {
     public Survey(List<Question> questions) {
         this.questions = questions;
     }
+
 
     public long getId() {
         return id;
