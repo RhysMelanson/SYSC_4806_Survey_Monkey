@@ -1,5 +1,8 @@
 package JpaApplication.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +15,17 @@ public class Question {
     private long id;
 
     private String questions = "";
+    private String radioButtonSelectedValue = "";
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
     private QuestionType questionType;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
+    @JsonManagedReference
     private List<Answer> answers;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JsonBackReference
     private Survey survey;
 
     public Question(){
@@ -78,6 +84,22 @@ public class Question {
 
     public void setQuestions(String question) {
         this.questions = question;
+    }
+
+    public String getRadioButtonSelectedValue() {
+        return radioButtonSelectedValue;
+    }
+
+    public void setRadioButtonSelectedValue(String radioButtonSelectedValue) {
+        this.radioButtonSelectedValue = radioButtonSelectedValue;
+    }
+
+    public Survey getSurvey() {
+        return survey;
+    }
+
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     @Override
