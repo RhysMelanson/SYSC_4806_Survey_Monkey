@@ -61,13 +61,13 @@ public class SurveyController {
         return "result";
     }
 
-
     @GetMapping("/addNumberRange")
     public String addNumberRangeForm(Model model) {
         model.addAttribute("question", new Question());
         model.addAttribute("numberRange", new NumberRange());
         return "addNumberRange";
     }
+
     @PostMapping("/addNumberRange")
     public String addNumberRangeSubmit(@ModelAttribute Question question, @ModelAttribute NumberRange questionType,
                                        Model model) {
@@ -77,6 +77,7 @@ public class SurveyController {
         QuestionRepo.save(question);
         return "result";
     }
+
     @GetMapping("/Surveys")
     public String SurveyList(Model model) {
 
@@ -84,7 +85,6 @@ public class SurveyController {
         test.setName("How much work do you do?");
         Survey test2 = new Survey();
         test2.setName("What your favorite ice cream?");
-
 
         SurveyRepo.save(test);
         SurveyRepo.save(test2);
@@ -95,16 +95,10 @@ public class SurveyController {
     }
 
 
-
     @GetMapping("/ViewAnswers")
     public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
         //System.out.println(id);
         long ID = Long.parseLong(id);
-
-
-
-
-
 
         System.out.println(SurveyRepo.findAll());
         Survey ChosenSurvey = SurveyRepo.findById(ID);
@@ -117,6 +111,20 @@ public class SurveyController {
         model.addAttribute("Questions", quest);
 
         return "ViewAnswers";
+    }
+
+    @GetMapping("/newSurvey")
+    public String addSurvey(Model model){
+        model.addAttribute("survey", new Survey());
+        return "newSurvey";
+    }
+
+    @PostMapping("/newSurvey")
+    public String addSurvey(@ModelAttribute Survey survey, Model model){
+        model.addAttribute("survey", survey);
+        SurveyRepo.save(survey);
+        System.out.println(SurveyRepo.findAll());
+        return "questionType";
     }
 
 }
