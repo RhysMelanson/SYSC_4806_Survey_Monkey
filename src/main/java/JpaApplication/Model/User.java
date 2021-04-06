@@ -1,7 +1,5 @@
 package JpaApplication.Model;
 
-import JpaApplication.Model.AllUsers;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,30 +10,17 @@ public class User{
     private long Id;
 
     private String userName;
-    //private String userPass;
-
-    @ManyToOne
-    private AllUsers allUsers;
 
     public User(String userName)
     {
         this.userName = userName;
     }
-    /*public User(String userName, String userPass)
-    {
-        this.userName = userName;
-        this.userPass = userPass;
-    }*/
 
     public void setUserName(String userName)
     {
         this.userName = userName;
     }
 
-   /* public void setPassword(String userPass)
-    {
-        this.userPass = userPass;
-    }*/
 
     public void setId(long Id)
     {
@@ -50,8 +35,5 @@ public class User{
     {
         return this.userName;
     }
-    /*public String getPassword()
-    {
-        return this.userPass;
-    }*/
+
 }
