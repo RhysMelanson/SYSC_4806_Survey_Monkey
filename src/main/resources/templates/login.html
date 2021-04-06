@@ -7,14 +7,15 @@
 </head>
 <body>
 <h1>User Accounts</h1>
-<form action="#" th:action="@{/addUser}" th:object="${userName}" method="post">
-    <p>Current Username: <input type="text" th:field="*{LoginName}" /></p>
+<form action="#" th:action="@{/loginUser}" th:object="${user}" method="post">
+    <p>Current Username: <input type="text" th:field="*{userName}" /></p>
     <p><input type="submit" value="Login" /> </p>
 </form>
 
-<form action="#" th:action="@{/AllUser}" th:object="${loginAU}" method="post">
-    <p>New Username: <input type="text" th:field="*{CreateName}" /></p>
+<form action="#" th:action="@{/AllUser}" th:object="${user}" method="post">
+    <p>New Username: <input type="text" th:field="*{userName}" /></p>
     <p><input type="submit" value="Create Account" /></p>
 </form>
+<p>Return to the home page <a href="/">here</a></p>
 </body>
 </html>
