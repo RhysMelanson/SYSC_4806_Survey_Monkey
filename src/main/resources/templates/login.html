@@ -12,7 +12,7 @@
     <p><input type="submit" value="Login" /> </p>
 </form>
 
-<form action="#" th:action="@{/AllUser}" th:object="${user}" method="post">
+<form action="#" th:action="@{/addUser}" th:object="${user}" method="post">
     <p>New Username: <input type="text" th:field="*{userName}" /></p>
     <p><input type="submit" value="Create Account" /></p>
 </form>
