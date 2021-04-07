@@ -8,4 +8,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface SurveyRepository extends CrudRepository<Survey, Long> {
 
     Survey findById(long id);
+    Survey findByName(String name);
 }

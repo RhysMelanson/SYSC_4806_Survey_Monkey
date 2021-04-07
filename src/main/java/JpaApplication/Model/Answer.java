@@ -1,5 +1,7 @@
 package JpaApplication.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,10 +13,12 @@ public class Answer {
 
     private String answer = "";
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JsonBackReference
     private Question question;
 
-    public Answer(){}
+    public Answer(){
+    }
 
     public Answer(String answer){
         this.answer = answer;
@@ -34,6 +38,14 @@ public class Answer {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override

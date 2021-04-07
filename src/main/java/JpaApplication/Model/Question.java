@@ -1,5 +1,8 @@
 package JpaApplication.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +15,17 @@ public class Question {
     private long id;
 
     private String questions = "";
+    private String radioButtonSelectedValue = "";
 
-    private int questionType = -1;
-    private String multipleChoiceAnswer1 = "";
-    private String multipleChoiceAnswer2 = "";
-    private String multipleChoiceAnswer3 = "";
-    private String multipleChoiceAnswer4 = "";
-    private int numberMinOption = 0;
-    private int numberMaxOption = 10;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
+    private QuestionType questionType;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
+    @JsonManagedReference
     private List<Answer> answers;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JsonBackReference
     private Survey survey;
 
     public Question(){
@@ -61,11 +62,11 @@ public class Question {
         answers.remove(index);
     }
 
-    public int getQuestionType() {
+    public QuestionType getQuestionType() {
         return questionType;
     }
 
-    public void setQuestionType(int questionType) {
+    public void setQuestionType(QuestionType questionType) {
         this.questionType = questionType;
     }
 
@@ -85,65 +86,20 @@ public class Question {
         this.questions = question;
     }
 
-    public String getMultipleChoiceAnswer1() {
-        return multipleChoiceAnswer1;
+    public String getRadioButtonSelectedValue() {
+        return radioButtonSelectedValue;
     }
 
-    public void setMultipleChoiceAnswer1(String multipleChoiceAnswer1) {
-        this.multipleChoiceAnswer1 = multipleChoiceAnswer1;
+    public void setRadioButtonSelectedValue(String radioButtonSelectedValue) {
+        this.radioButtonSelectedValue = radioButtonSelectedValue;
     }
 
-    public String getMultipleChoiceAnswer2() {
-        return multipleChoiceAnswer2;
+    public Survey getSurvey() {
+        return survey;
     }
 
-    public void setMultipleChoiceAnswer2(String multipleChoiceAnswer2) {
-        this.multipleChoiceAnswer2 = multipleChoiceAnswer2;
-    }
-
-    public String getMultipleChoiceAnswer3() {
-        return multipleChoiceAnswer3;
-    }
-
-    public void setMultipleChoiceAnswer3(String multipleChoiceAnswer3) {
-        this.multipleChoiceAnswer3 = multipleChoiceAnswer3;
-    }
-
-    public String getMultipleChoiceAnswer4() {
-        return multipleChoiceAnswer4;
-    }
-
-    public void setMultipleChoiceAnswer4(String multipleChoiceAnswer4) {
-        this.multipleChoiceAnswer4 = multipleChoiceAnswer4;
-    }
-
-    public int getNumberMinOption() {
-        return numberMinOption;
-    }
-
-    public void setNumberMinOption(int numberMinOption) {
-        this.numberMinOption = numberMinOption;
-    }
-
-    public int getNumberMaxOption() {
-        return numberMaxOption;
-    }
-
-    public void setNumberMaxOption(int numberMaxOption) {
-        this.numberMaxOption = numberMaxOption;
-    }
-
-    public String typeToString() {
-        String s = "Not picked yet";
-        switch(this.questionType) {
-            case 0:
-                s = "Open-Ended Question";
-            case 1:
-                s = "Multiple-Choice Question";
-            case 2:
-                s = "Number-Range Question";
-        }
-        return s;
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
     }
 
     @Override
