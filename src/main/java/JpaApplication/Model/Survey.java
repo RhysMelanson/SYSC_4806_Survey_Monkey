@@ -4,8 +4,8 @@ import JpaApplication.Model.Question;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Survey {
@@ -18,13 +18,13 @@ public class Survey {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
     @JsonManagedReference
-    private List<Question> questions;
+    private Set<Question> questions;
 
     public Survey() {
-        questions = new ArrayList<Question>();
+        questions = new HashSet<Question>();
     }
 
-    public Survey(List<Question> questions) {
+    public Survey(Set<Question> questions) {
         this.questions = questions;
     }
 
@@ -45,24 +45,20 @@ public class Survey {
         this.name = name;
     }
 
-    public void addQuestionInfo(Question question) {
+    public void addQuestions(Question question) {
         questions.add(question);
     }
 
-    public List<Question> getQuestionInfos() {
+    public Set<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestionInfos(List<Question> survey) {
+    public void setQuestions(Set<Question> survey) {
         this.questions = survey;
     }
 
-    public Question getQuestionInfo(int index) {
-        return questions.get(index);
-    }
-
-    public void removeQuestionInfo(int index) {
-        questions.remove(index);
+    public void removeQuestionInfo(Question question) {
+        questions.remove(question);
     }
 
     @Override
