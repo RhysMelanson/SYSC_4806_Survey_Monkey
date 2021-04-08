@@ -23,22 +23,22 @@ public class HandlingFormSubmissionApplication {
     }
 
     @Bean
-    CommandLineRunner runner(QuestionRepository repo, SurveyRepository repository) {
+    CommandLineRunner runner(AnswerRepository repo, SurveyRepository repository) {
         return args -> {
             Question quest = new Question("hi?");
             Answer ans1 = new Answer("this is the first answer");
             ans1.setQuestion(quest);
-            Answer ans2 = new Answer("this is the second answer");
+            Answer ans2 = new Answer("this is the first answer");
             ans2.setQuestion(quest);
             Survey surv = new Survey();
             surv.setName("name");
             quest.setSurvey(surv);
             quest.setQuestionType(new OpenEnded());
             repository.save(surv);
-//            System.out.println(repo.findById(1).getAnswers());
-            System.out.println(repository.findByName("name").getId());
-            Survey survey1 = repository.findByName("name");
-            System.out.println(repository.findByName("name").getQuestions());
+            System.out.println(repo.findByAnswerAndQuestion("this is the first answer", quest));
+//            System.out.println(repository.findByName("name").getId());
+//            Survey survey1 = repository.findByName("name");
+//            System.out.println(repository.findByName("name").getQuestions());
         };
     }
 

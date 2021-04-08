@@ -2,7 +2,7 @@
 package JpaApplication.Controller;
 
 import JpaApplication.Model.User;
-import JpaApplication.Repository.UserNewRepository;
+import JpaApplication.Repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,37 +13,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@RestController
-class UserController {
+@Controller
+public class UserController {
 
-    private final UserNewRepository repository;
-
-
-    UserController(UserNewRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private UserRepository userRepo;
 
     @GetMapping("/user")
     List<User> all() {
-        return (List<User>) repository.findAll();
+        return (List<User>) userRepo.findAll();
     }
+//
+//    @GetMapping("/addUser")
+//    public String addUserForm(Model model)
+//    {
+//        model.addAttribute("user", new User());
+//        return "login";
+//    }
+//    @PostMapping("/addUser")
+//    public String addUserSubmit(@ModelAttribute User user, Model model)
+//    {
+//        model.addAttribute("user", user);
+//        userRepo.save(user);
+//        return "login";
+//    }
 
-    @GetMapping("/addUser")
-    public String addUserSubmit(@ModelAttribute User user, Model model)
+    @GetMapping("/")
+    public String loginCurrentUser(Model model)
     {
-        model.addAttribute("user", new User(user.getUserName()));
-
-        repository.save(user);
-
-        User u = repository.findByUserName(user.getUserName());
-        return "created";
+        model.addAttribute("user", new User());
+        return "index";
     }
-    @GetMapping("/loginUser")
+
+    @PostMapping("/")
     public String loginCurrentUser(@ModelAttribute User user, Model model)
     {
-        model.addAttribute("user", user);
-        repository.findByUserName(user.getUserName());
-
-        return "logged";
+        User allUsers = userRepo.findByUserName(user.getUserName());
+        if(allUsers == null){
+            userRepo.save(user);
+        }
+//        model.addAttribute("username", user.getUserName());
+        return "redirect:/Surveys?name=" + user.getUserName();
     }
 }
