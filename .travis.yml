@@ -3,7 +3,7 @@ jdk:
   - openjdk8
 
 script:
-  - java QuestionTest.java
+  - java TestBuddyApplication.java
 
 deploy:
   provider: heroku
