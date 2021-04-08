@@ -31,11 +31,19 @@ class UserController {
     @GetMapping("/addUser")
     public String addUserSubmit(@ModelAttribute User user, Model model)
     {
-        model.addAttribute("user", user);
+        model.addAttribute("user", new User(user.getUserName()));
 
         repository.save(user);
 
         User u = repository.findByUserName(user.getUserName());
         return "created";
+    }
+    @GetMapping("/loginUser")
+    public String loginCurrentUser(@ModelAttribute User user, Model model)
+    {
+        model.addAttribute("user", user);
+        repository.findByUserName(user.getUserName());
+
+        return "logged";
     }
 }

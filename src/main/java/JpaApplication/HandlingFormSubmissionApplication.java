@@ -27,18 +27,16 @@ public class HandlingFormSubmissionApplication {
             Question quest = new Question("hi?");
             Answer ans1 = new Answer("this is the first answer");
             ans1.setQuestion(quest);
-            quest.addAnswer(ans1);
             Answer ans2 = new Answer("this is the second answer");
             ans2.setQuestion(quest);
-            quest.addAnswer(ans2);
             Survey surv = new Survey();
             surv.setName("name");
             quest.setSurvey(surv);
-            surv.addQuestionInfo(quest);
-//            repo.save(quest);
             repository.save(surv);
 //            System.out.println(repo.findById(1).getAnswers());
-            System.out.println(repository.findByName("name").getQuestionInfos());
+            System.out.println(repository.findByName("name").getId());
+            Survey survey1 = repository.findByName("name");
+            System.out.println(repository.findByName("name").getQuestions());
         };
     }
 

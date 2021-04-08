@@ -35,7 +35,7 @@ public class QuestionTest {
         Question qi = new Question("What colour is the sky?");
         Answer ans = new Answer("Blue");
         qi.addAnswer(ans);
-        assertEquals("Blue", qi.getAnswer(0).toString());
+        assertTrue(qi.getAnswers().contains(ans));
     }
     @Test
     public void testToString(){
