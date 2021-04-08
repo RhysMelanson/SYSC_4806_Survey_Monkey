@@ -26,16 +26,16 @@ class AnswerController {
     }
 
     @GetMapping("/answerPieInfo")
-    public String getData(Model model, @ModelAttribute Question question, @ModelAttribute String answer)
+    public String getData(Model model, @ModelAttribute Question question)
     {
         List<List<Object>> allData = new ArrayList<List<Object>>();
         List answers;
-        answers = question.getAnswers();
+        answers = new ArrayList<>(question.getAnswers());
         for(int i = 0;i<answers.size();i++)
         {
             List<Object> data = new ArrayList<Object>();
-            data.add(answers.get(i));
-            data.add(repository.findByAnswerAndQuestion(answer, question));
+            data.add(answers.get(i).toString());
+            data.add(repository.findByAnswerAndQuestion(answers.get(i).toString(), question));
             allData.add(data);
         }
         model.addAttribute("pieData", allData);
