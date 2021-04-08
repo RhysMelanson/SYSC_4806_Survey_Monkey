@@ -145,5 +145,52 @@ public class SurveyController {
         System.out.println(SurveyRepo.findAll());
         return "questionType";
     }
+    
+    @GetMapping("/chooseSurveyToAnswer")
+    public String chooseSurvey(Model model) {
+        model.addAttribute("Surveys", SurveyRepo.findAll());
+        return "answerableSurveys";
+    }
+
+    @PostMapping("/chooseSurveyToAnswer")
+    public String chooseSurvey(Model model, Survey survey) {
+        Survey mySurvey = SurveyRepo.findById(survey.getId());
+        model.addAttribute("Survey", mySurvey);
+        return "selectQuestionToAnswer";
+    }
+
+    @GetMapping("/questionToAnswer")
+    public String QuestionAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id,@RequestParam(name="Qid", required = false, defaultValue = "1") String Qid, Model model) {
+        long ID = Long.parseLong(id);
+        Survey mySurvey = SurveyRepo.findById(ID);
+        Set<Question> myQuestions = mySurvey.getQuestions();
+        Answer answer = new Answer();
+
+        long QID = Long.parseLong(Qid);
+        Question myQuestion = QuestionRepo.findById(QID);
+
+        model.addAttribute("Answer", answer);
+        model.addAttribute("Survey", myQuestions);
+        model.addAttribute("mySurvey", mySurvey);
+
+        return "selectQuestionToAnswer";
+    }
+
+    @PostMapping("/questionToAnswer")
+    public String QuestionAnswerForm(@RequestParam(name="id", required=false, defaultValue="1") String id, @RequestParam(name="Qid", required = false, defaultValue = "1") String Qid, @ModelAttribute Answer answer, Model model) {
+        long ID = Long.parseLong(id);
+        Survey mySurvey = SurveyRepo.findById(ID);
+        Set<Question> myQuestions = mySurvey.getQuestions();
+        long QID = Long.parseLong(Qid);
+        Question myQuestion = QuestionRepo.findById(QID);
+
+        answer = new Answer();
+        answer.setQuestion(myQuestion);
+        myQuestion.addAnswer(answer);
+
+        model.addAttribute("Answer", answer);
+        model.addAttribute("survey", mySurvey);
+        return "selectQuestionToAnswer";
+    }
 
 }
