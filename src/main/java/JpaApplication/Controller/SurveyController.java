@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class SurveyController {
@@ -20,6 +21,8 @@ public class SurveyController {
 
     @Autowired
     private SurveyRepository SurveyRepo;
+
+    private String surveyID;
 
     @GetMapping("/questionType")
     public String chooseQuestionType(Model model) {
@@ -62,8 +65,10 @@ public class SurveyController {
     }
 
     @GetMapping("/addNumberRange")
-    public String addNumberRangeForm(Model model) {
-        model.addAttribute("question", new Question());
+    public String addNumberRangeForm(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
+        surveyID = id;
+        Question question = new Question();
+        model.addAttribute("question", question);
         model.addAttribute("numberRange", new NumberRange());
         return "addNumberRange";
     }
@@ -71,10 +76,14 @@ public class SurveyController {
     @PostMapping("/addNumberRange")
     public String addNumberRangeSubmit(@ModelAttribute Question question, @ModelAttribute NumberRange questionType,
                                        Model model) {
+        long ID = Long.parseLong(surveyID);
+        Survey survey = SurveyRepo.findById(ID);
+        question.setQuestionType(questionType);
+        question.setSurvey(survey);
         model.addAttribute("question", question);
         model.addAttribute("questionType", questionType);
-        question.setQuestionType(questionType);
         QuestionRepo.save(question);
+        SurveyRepo.save(survey);
         return "result";
     }
 
@@ -106,7 +115,7 @@ public class SurveyController {
        // System.out.println(ChosenSurvey.getName());
         //System.out.println(ChosenSurvey.getId());
 
-        List<Question> quest = ChosenSurvey.getQuestionInfos();
+        Set<Question> quest = ChosenSurvey.getQuestions();
         System.out.println(quest);
         model.addAttribute("Questions", quest);
 
