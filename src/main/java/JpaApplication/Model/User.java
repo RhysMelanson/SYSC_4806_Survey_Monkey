@@ -11,6 +11,7 @@ public class User{
 
     private String userName;
 
+    public User(){this.userName = "tempName" + this.Id;}
     public User(String userName)
     {
         this.userName = userName;
