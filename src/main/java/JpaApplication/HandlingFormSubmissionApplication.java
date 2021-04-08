@@ -1,6 +1,7 @@
 package JpaApplication;
 
 import JpaApplication.Model.Answer;
+import JpaApplication.Model.OpenEnded;
 import JpaApplication.Model.Question;
 import JpaApplication.Model.Survey;
 import JpaApplication.Repository.AnswerRepository;
@@ -32,6 +33,7 @@ public class HandlingFormSubmissionApplication {
             Survey surv = new Survey();
             surv.setName("name");
             quest.setSurvey(surv);
+            quest.setQuestionType(new OpenEnded());
             repository.save(surv);
 //            System.out.println(repo.findById(1).getAnswers());
             System.out.println(repository.findByName("name").getId());
