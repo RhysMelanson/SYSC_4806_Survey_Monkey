@@ -59,11 +59,11 @@ public class AddQuestionController {
                 break;
             case "Multiple Choice Question":
                 model.addAttribute("questionType", multipleChoice);
-                question.setQuestionType(multipleChoice);
+                question.setQuestionType(openEnded);
                 break;
             case "Range of Number Question":
                 model.addAttribute("questionType", numberRange);
-                question.setQuestionType(numberRange);
+                question.setQuestionType(openEnded);
                 break;
         }
         question.setSurvey(survey);
