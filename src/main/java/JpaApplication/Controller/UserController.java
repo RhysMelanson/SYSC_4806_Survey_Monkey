@@ -16,33 +16,38 @@ import java.util.List;
 @RestController
 class UserController {
 
-    private final UserNewRepository repository;
+    private final UserNewRepository userRepo;
 
 
     UserController(UserNewRepository repository) {
-        this.repository = repository;
+        this.userRepo = repository;
     }
 
     @GetMapping("/user")
     List<User> all() {
-        return (List<User>) repository.findAll();
+        return (List<User>) userRepo.findAll();
     }
 
     @GetMapping("/addUser")
+    public String addUserForm(Model model)
+    {
+        model.addAttribute("user", new User());
+        return "addUser";
+    }
+    @PostMapping("/addUser")
     public String addUserSubmit(@ModelAttribute User user, Model model)
     {
-        model.addAttribute("user", new User(user.getUserName()));
-
-        repository.save(user);
-
-        User u = repository.findByUserName(user.getUserName());
-        return "created";
+        model.addAttribute("user", user);
+        userRepo.save(user);
+        return "added";
     }
     @GetMapping("/loginUser")
-    public String loginCurrentUser(@ModelAttribute User user, Model model)
+    public String loginCurrentUser(@ModelAttribute String userName, Model model)
     {
-        model.addAttribute("user", user);
-        repository.findByUserName(user.getUserName());
+        System.out.println(userRepo.findAll());
+        User loggedUser = userRepo.findByUserName(userName);
+
+        model.addAttribute("user", loggedUser);
 
         return "logged";
     }
