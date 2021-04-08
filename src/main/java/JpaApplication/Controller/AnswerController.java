@@ -25,21 +25,4 @@ class AnswerController {
         return (List<Answer>) repository.findAll();
     }
 
-    @GetMapping("/answerPieInfo")
-    public String getData(Model model, @ModelAttribute Question question)
-    {
-        List<List<Object>> allData = new ArrayList<List<Object>>();
-        List answers;
-        answers = new ArrayList<>(question.getAnswers());
-        for(int i = 0;i<answers.size();i++)
-        {
-            List<Object> data = new ArrayList<Object>();
-            data.add(answers.get(i).toString());
-            data.add(repository.findByAnswerAndQuestion(answers.get(i).toString(), question));
-            allData.add(data);
-        }
-        model.addAttribute("pieData", allData);
-        return "pieChart";
-    }
-
 }
