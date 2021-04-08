@@ -32,14 +32,14 @@ class UserController {
     public String addUserForm(Model model)
     {
         model.addAttribute("user", new User());
-        return "addUser";
+        return "login";
     }
     @PostMapping("/addUser")
     public String addUserSubmit(@ModelAttribute User user, Model model)
     {
         model.addAttribute("user", user);
         userRepo.save(user);
-        return "added";
+        return "login";
     }
     @GetMapping("/loginUser")
     public String loginCurrentUser(@ModelAttribute String userName, Model model)
@@ -49,6 +49,6 @@ class UserController {
 
         model.addAttribute("user", loggedUser);
 
-        return "logged";
+        return "login";
     }
 }
