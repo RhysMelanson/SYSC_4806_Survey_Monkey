@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Question {
@@ -22,22 +22,22 @@ public class Question {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
     @JsonManagedReference
-    private List<Answer> answers;
+    private Set<Answer> answers;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JsonBackReference
     private Survey survey;
 
     public Question(){
-        answers = new ArrayList<Answer>();
+        answers = new HashSet<Answer>();
     }
 
     public Question(String question) {
         this.questions = question;
-        answers = new ArrayList<Answer>();
+        answers = new HashSet<Answer>();
     }
 
-    public Question(String question, List<Answer> answers) {
+    public Question(String question, Set<Answer> answers) {
         this.questions = question;
         this.answers = answers;
     }
@@ -46,20 +46,16 @@ public class Question {
         answers.add(answer);
     }
 
-    public List<Answer> getAnswers() {
+    public Set<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers) {
+    public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
     }
 
-    public Answer getAnswer(int index) {
-        return answers.get(index);
-    }
-
-    public void removeAnswer(int index) {
-        answers.remove(index);
+    public void removeAnswer(Answer answer) {
+        answers.remove(answer);
     }
 
     public QuestionType getQuestionType() {
@@ -100,6 +96,7 @@ public class Question {
 
     public void setSurvey(Survey survey) {
         this.survey = survey;
+        survey.addQuestions(this);
     }
 
     @Override
