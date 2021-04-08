@@ -2,15 +2,57 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Question Creation</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/questionTypeChoose.js}"></script>
+    <script type="text/javascript" th:src="@{/js/inputPopup.js}"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
-<h1>Form</h1>
-<form action="#" th:action="@{/addQuestion}" th:object="${question}" method="post">
-    <p>Input Question: <input type="text" th:field="*{questions}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
-<p><a href="/questionType">Click here to change question type</a></p>
-<p><a href="/">To return to the HomePage click here</a></p>
+    <h1>Form</h1>
+    <form action="#" th:action="@{/addQuestion}" th:object="${question}" method="post">
+        <p>Input Question: <input type="text" th:field="*{questions}" /></p>
+        <ul id="radioClicked">
+            <li th:each="radioValue: ${allValues}">
+                <input type="radio"
+                       th:field="*{radioButtonSelectedValue}"
+                       th:value="${radioValue}" />
+                <label
+                        th:for="${#ids.prev('radioButtonSelectedValue')}"
+                        th:text="${radioValue}"></label>
+            </li>
+        </ul>
+        <div id="multiple-choice" th:object="${multipleChoice}">
+            <p>Input Answer 1: <input type="text" th:field="*{answer1}" /></p>
+            <p>Input Answer 2: <input type="text" th:field="*{answer2}" /></p>
+            <p>Input Answer 3: <input type="text" th:field="*{answer3}" /></p>
+            <p>Input Answer 4: <input type="text" th:field="*{answer4}" /></p>
+        </div>
+        <div id="number-range" th:object="${numberRange}">
+            <p>Input the range's Minimum: <input type="number" th:field="*{min}" /></p>
+            <p>Input the range's Maximum: <input type="number" th:field="*{max}" /></p>
+        </div>
+        <p id="submit" ><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+    <p><a href="/">To return to the HomePage click here</a></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th> Question</th>
+                <th> Number of Answers </th>
+            </tr>
+        </thead>
+        <tbody th:object="${questions}">
+            <tr th:each="Question : ${questions}">
+                <td><span th:text="${Question.questions}"> Question </span></td>
+                <td><span th:text="${Question.answersCount}"> Number of Answers </span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
 </body>
 </html>
