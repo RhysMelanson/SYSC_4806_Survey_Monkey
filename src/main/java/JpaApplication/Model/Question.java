@@ -16,6 +16,7 @@ public class Question {
 
     private String questions = "";
     private String radioButtonSelectedValue = "";
+    private int answersCount = 0;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
     private QuestionType questionType;
@@ -88,6 +89,10 @@ public class Question {
 
     public void setRadioButtonSelectedValue(String radioButtonSelectedValue) {
         this.radioButtonSelectedValue = radioButtonSelectedValue;
+    }
+
+    public int getAnswersCount() {
+        return answers.size();
     }
 
     public Survey getSurvey() {
