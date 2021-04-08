@@ -3,7 +3,7 @@ jdk:
   - openjdk8
 
 script:
-  - java TestBuddyApplication.java
+  - mvn test
 
 deploy:
   provider: heroku
