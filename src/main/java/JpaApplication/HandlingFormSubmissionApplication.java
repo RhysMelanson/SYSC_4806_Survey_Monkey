@@ -39,6 +39,7 @@ public class HandlingFormSubmissionApplication {
 //          Creating a survey with its question
             Survey surv = new Survey();
             surv.setName("name");
+            surv.setState(true);
             quest.setSurvey(surv);
 
 //          Creating a user with its question

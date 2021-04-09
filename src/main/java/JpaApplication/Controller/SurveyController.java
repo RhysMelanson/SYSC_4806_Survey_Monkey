@@ -43,15 +43,18 @@ public class SurveyController {
         Iterable<Survey> Surveys = SurveyRepo.findAll();
         ArrayList<Survey> survs = new ArrayList<Survey>();
 
+
+
         for(Survey s: Surveys){
-            if(s.getUser() == user || s.getState()){
+            System.out.println(s.getState());
+            if(s.getUser() == user || s.getState() == true){
                 //then just add the if open statement
                 System.out.println(s.getUser().getUserName());
                 survs.add(s);
             }
         }
 
-        System.out.println(user.getUserName());
+
 
 
         model.addAttribute("user", user.getUserName());
@@ -74,10 +77,23 @@ public class SurveyController {
 
         Set<Question> quest = ChosenSurvey.getQuestions();
 
+        model.addAttribute("Survey", ChosenSurvey);
         model.addAttribute("Questions", quest);
         model.addAttribute("Open", new OpenEnded());
 
         return "ViewAnswers";
+    }
+
+    @PostMapping("/ViewAnswers")
+    public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") int id, Model model) {
+        long ID = id;
+        Survey surv = SurveyRepo.findById(ID);
+        surv.setState(false);
+        SurveyRepo.save(surv);
+        System.out.println("team" + SurveyRepo.findById(ID).getState());
+
+        model.addAttribute("survey", new Survey());
+        return "newSurvey";
     }
 
     @GetMapping("/newSurvey")

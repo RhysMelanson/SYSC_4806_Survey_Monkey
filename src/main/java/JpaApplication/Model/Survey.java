@@ -19,7 +19,7 @@ public class Survey {
 
     private String name;
 
-    private boolean state = true;
+    private boolean state;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
     @JsonManagedReference
