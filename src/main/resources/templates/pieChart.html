@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Final Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(surveyResults);
+        function surveyResults() {
+            var results = new google.visualization.DataTable();
+            results.addColumn('string', 'Answer');
+            results.addColumn('number', 'Amount');
+            results.addRows([[${pieData}}]]);
+            var options = {'title':'Survey Result Spread',
+                'width':1000,
+                'height':1000};
+            var chart = new google.visualization.PieChart(document.getElementById('answerSpread'));
+            chart.draw(results, options);
+        }
+    </script>
+</head>
+<body>
+<h1>Results</h1>
+<div id="answerSpread"></div>
+</body>
+</html>
