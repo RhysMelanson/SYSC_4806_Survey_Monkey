@@ -2,7 +2,9 @@ package JpaApplication.Model;
 
 import JpaApplication.Model.Question;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import JpaApplication.Repository.QuestionRepository;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,6 +18,8 @@ public class Survey {
     private long id;
 
     private String name;
+
+    private boolean state;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
     @JsonManagedReference
@@ -73,6 +77,14 @@ public class Survey {
     public void setUser(User user) {
         this.user = user;
         user.addSurvey(this);
+    }
+
+    public boolean getState(){
+        return state;
+    }
+
+    public void setState(boolean open){
+        this.state = open;
     }
 
     @Override

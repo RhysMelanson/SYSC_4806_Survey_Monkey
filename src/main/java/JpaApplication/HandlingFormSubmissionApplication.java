@@ -6,6 +6,11 @@ import JpaApplication.Repository.QuestionRepository;
 import JpaApplication.Repository.SurveyRepository;
 import JpaApplication.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import JpaApplication.Model.*;
+import JpaApplication.Repository.AnswerRepository;
+import JpaApplication.Repository.QuestionRepository;
+import JpaApplication.Repository.SurveyRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +39,7 @@ public class HandlingFormSubmissionApplication {
 //          Creating a survey with its question
             Survey surv = new Survey();
             surv.setName("name");
+            surv.setState(true);
             quest.setSurvey(surv);
 
 //          Creating a user with its question

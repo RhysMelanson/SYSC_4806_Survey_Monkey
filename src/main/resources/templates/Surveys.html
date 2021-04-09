@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Surveys</h1>
+<p>Add a question <a href="/addQuestion">here</a></p>
 <table>
     <thead>
     <tr>
@@ -21,9 +22,27 @@
     <tr th:each="Survey : ${Surveys}">
         <td><span th:text="${Survey.name}"> Title </span></td>
         <td><span th:text="${Survey.id}"> ID </span></td>
-        <td><form action="" th:action="@{/addQuestion(id=${Survey.id})}">
-            <a th:href="@{/addQuestion(id=${Survey.id})}"> Select </a> <br/>
-        </form></td>
+        <td><form action="Selecting" th:action="@{/ViewAnswers(id=${Survey.id})}">
+            <a id="disabled-link" th:href="@{/ViewAnswers(id=${Survey.id})}" > Select </a> <br/>
+        </form><script th:inline="javascript">
+        /*<![CDATA[*/
+
+
+        var message = [[${user}]];
+        var name = [[${Survey.user.userName}]];
+
+
+        if(name.localeCompare(message)==0){
+
+
+
+        }else{
+            var myElement = document.getElementById("disabled-link");
+            myElement.remove();
+        }
+
+        /*]]>*/
+    </script></td>
     </tr>
     </tbody>
 </table>

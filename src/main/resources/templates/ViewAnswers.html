@@ -16,13 +16,19 @@
     </thead>
     <tbody>
     <tr th:if="${Questions.empty}">
-        <td colspan="2"> No Surveys Available </td>
+        <td colspan="2"> This Survey is blank </td>
     </tr>
     <tr th:each="Question : ${Questions}">
         <td><span th:text="${Question.questions}"> Title </span></td>
-        <td><span th:text="${Question.answers}"> Answers </span></td>
+        <td><span th:text="${Question.Answers}"> Answers </span>
+        </td>
+
     </tr>
+
     </tbody>
 </table>
+<form action="#" th:action="@{/ViewAnswers(id=${Survey.id})}" th:object="${Survey}" method="post">
+<input type="submit" name="#" value="Close" />
+</form>
 </body>
 </html>

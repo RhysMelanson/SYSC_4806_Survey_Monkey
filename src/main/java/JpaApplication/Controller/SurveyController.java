@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -39,7 +40,25 @@ public class SurveyController {
 //        SurveyRepo.save(test);
 //        SurveyRepo.save(test2);
 
-        model.addAttribute("Surveys", user.getSurveys());
+        Iterable<Survey> Surveys = SurveyRepo.findAll();
+        ArrayList<Survey> survs = new ArrayList<Survey>();
+
+
+
+        for(Survey s: Surveys){
+
+            if(s.getUser() == user || s.getState() == true){
+                //then just add the if open statement
+                
+                survs.add(s);
+            }
+        }
+
+
+
+
+        model.addAttribute("user", user.getUserName());
+        model.addAttribute("Surveys", survs);
 
         return "Surveys";
     }
@@ -50,17 +69,31 @@ public class SurveyController {
         //System.out.println(id);
         long ID = Long.parseLong(id);
 
-        System.out.println(SurveyRepo.findAll());
+
         Survey ChosenSurvey = SurveyRepo.findById(ID);
         //System.out.println(ChosenSurvey);
        // System.out.println(ChosenSurvey.getName());
         //System.out.println(ChosenSurvey.getId());
 
         Set<Question> quest = ChosenSurvey.getQuestions();
-        System.out.println(quest);
+
+        model.addAttribute("Survey", ChosenSurvey);
         model.addAttribute("Questions", quest);
+        model.addAttribute("Open", new OpenEnded());
 
         return "ViewAnswers";
+    }
+
+    @PostMapping("/ViewAnswers")
+    public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") int id, Model model) {
+        long ID = id;
+        Survey surv = SurveyRepo.findById(ID);
+        surv.setState(false);
+        SurveyRepo.save(surv);
+
+
+        model.addAttribute("survey", new Survey());
+        return "newSurvey";
     }
 
     @GetMapping("/newSurvey")
