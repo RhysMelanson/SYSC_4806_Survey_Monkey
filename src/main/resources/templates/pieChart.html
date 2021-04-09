@@ -14,6 +14,7 @@
     <a th:href="@{/addQuestion(id=${Survey.id})}"> To return to the Survey click here </a> <br/>
 </form>
 <p><a href="/">To return to the HomePage click here</a></p>
+<p th:if="question.answers.empty">Question has not yet been answered</p>
 <div id="answerSpread"></div>
 </body>
 </html>

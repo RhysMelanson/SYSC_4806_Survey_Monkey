@@ -56,7 +56,6 @@ public class SurveyController {
             case "Open-Ended Question":
                 return "ViewOpenEndedAnswers";
             case "Multiple-Choice Question":
-                model.addAttribute("MultipleChoice", ChosenQuestion.getQuestionType());
                 model.addAttribute("question", ChosenQuestion);
                 return "pieChart";
             case "Number-range Question":

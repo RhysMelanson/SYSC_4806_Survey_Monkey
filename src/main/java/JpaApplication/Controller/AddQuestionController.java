@@ -57,15 +57,15 @@ public class AddQuestionController {
         switch (question.getRadioButtonSelectedValue()) {
             case "Open Ended Question":
                 model.addAttribute("questionType", openEnded);
-                question.setQuestionType(openEnded);
+                openEnded.setQuestion(question);
                 break;
             case "Multiple Choice Question":
                 model.addAttribute("questionType", multipleChoice);
-                question.setQuestionType(multipleChoice);
+                multipleChoice.setQuestion(question);
                 break;
             case "Range of Number Question":
                 model.addAttribute("questionType", numberRange);
-                question.setQuestionType(numberRange);
+                numberRange.setQuestion(question);
                 break;
         }
         question.setSurvey(survey);

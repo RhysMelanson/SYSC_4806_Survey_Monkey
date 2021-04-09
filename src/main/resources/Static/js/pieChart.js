@@ -1,3 +1,8 @@
+google.charts.load('current', {
+    callback: loadChat,
+    packages: ['corechart']
+});
+
 function surveyResults(info){
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Answer');
@@ -12,25 +17,27 @@ function surveyResults(info){
     chart.draw(data, options);
 }
 
-function loadChat(callback) {
-    $(document).ready(function() {
-        $.ajax({
-            url: "/questions/2"
-        }).then(function (data) {
-            var answers = data.questionType;
-            var count1 = getCount(answers.answer1, data.answers);
-            var count2 = getCount(answers.answer2, data.answers);
-            var count3 = getCount(answers.answer3, data.answers);
-            var count4 = getCount(answers.answer4, data.answers);
-            var info = [
-                [answers.answer1, count1],
-                [answers.answer2, count2],
-                [answers.answer3, count3],
-                [answers.answer4, count4],
-            ]
-            console.log(info);
-            callback(info);
-        });
+function loadChat() {
+    let searchParams = new URLSearchParams(window.location.search)
+    let param = searchParams.get('id')
+    var id= "[(${ID})]";
+    console.log(id.toString());
+    $.ajax({
+        url: "/questions/" + param
+    }).then(function (data) {
+        var answers = data.questionType;
+        var count1 = getCount(answers.answer1, data.answers);
+        var count2 = getCount(answers.answer2, data.answers);
+        var count3 = getCount(answers.answer3, data.answers);
+        var count4 = getCount(answers.answer4, data.answers);
+        var info = [
+            [answers.answer1, count1],
+            [answers.answer2, count2],
+            [answers.answer3, count3],
+            [answers.answer4, count4],
+        ]
+        console.log(info);
+        surveyResults(info);
     });
 }
 function getCount(answer1, data) {
@@ -42,9 +49,9 @@ function getCount(answer1, data) {
     }
     return count;
 }
-loadChat(load);
-google.charts.load('current', {'packages':['corechart']});
-
-function load(info){
-    google.charts.load(surveyResults(info));
-}
+// loadChat(load);
+// google.charts.load('current', {'packages':['corechart']});
+//
+// function load(info){
+//     google.charts.setOnLoadCallback(surveyResults(info));
+// }

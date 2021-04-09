@@ -59,6 +59,7 @@ public abstract class QuestionType {
 
     public void setQuestion(Question question) {
         this.question = question;
+        question.setQuestionType(this);
     }
 
     @Override

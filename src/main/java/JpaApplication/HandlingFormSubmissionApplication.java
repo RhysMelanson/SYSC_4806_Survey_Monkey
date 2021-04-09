@@ -31,7 +31,6 @@ public class HandlingFormSubmissionApplication {
             qt.setAnswer3("Third Answer");
             qt.setAnswer4("Fourth Answer");
             qt.setQuestion(quest);
-            quest.setQuestionType(qt);
             System.out.println(quest.getRadioButtonSelectedValue());
             for (int i = 0; i < 20; i++) {
                 Answer ans1 = new Answer("First Answer");
