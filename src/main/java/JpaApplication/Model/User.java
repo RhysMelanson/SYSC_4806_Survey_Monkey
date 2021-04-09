@@ -1,39 +1,47 @@
 package JpaApplication.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User{
 
     @Id
-    @GeneratedValue
-    private long Id;
-
     private String userName;
 
-    public User(String userName)
-    {
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
+    private Set<Survey> surveys;
+
+    public User(){
+        surveys = new HashSet<Survey>();
+    }
+
+    public User(String userName){
+        this.userName = userName;
+        surveys = new HashSet<Survey>();
+    }
+
+    public void setUserName(String userName){
         this.userName = userName;
     }
 
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
-    }
-
-
-    public void setId(long Id)
-    {
-        this.Id = Id;
-    }
-
-    public long getId()
-    {
-        return this.Id;
-    }
-    public String getUserName()
-    {
+    public String getUserName(){
         return this.userName;
     }
 
+    public void addSurvey(Survey survey) {
+        surveys.add(survey);
+    }
+
+    public Set<Survey> getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(Set<Survey> surveys) {
+        this.surveys = surveys;
+    }
 }

@@ -59,11 +59,11 @@ public class AddQuestionController {
                 break;
             case "Multiple Choice Question":
                 model.addAttribute("questionType", multipleChoice);
-                question.setQuestionType(openEnded);
+                question.setQuestionType(multipleChoice);
                 break;
             case "Range of Number Question":
                 model.addAttribute("questionType", numberRange);
-                question.setQuestionType(openEnded);
+                question.setQuestionType(numberRange);
                 break;
         }
         question.setSurvey(survey);
@@ -71,27 +71,4 @@ public class AddQuestionController {
         SurveyRepo.save(survey);
         return "redirect:/addQuestion?id=" + surveyID;
     }
-
-//    @GetMapping("/addNumberRange")
-//    public String addNumberRangeForm(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
-//        surveyID = id;
-//        Question question = new Question();
-//        model.addAttribute("question", question);
-//        model.addAttribute("numberRange", new NumberRange());
-//        return "addNumberRange";
-//    }
-//
-//    @PostMapping("/addNumberRange")
-//    public String addNumberRangeSubmit(@ModelAttribute Question question, @ModelAttribute NumberRange questionType,
-//                                       Model model) {
-//        long ID = Long.parseLong(surveyID);
-//        Survey survey = SurveyRepo.findById(ID);
-//        question.setQuestionType(questionType);
-//        question.setSurvey(survey);
-//        model.addAttribute("question", question);
-//        model.addAttribute("questionType", questionType);
-//        QuestionRepo.save(question);
-//        SurveyRepo.save(survey);
-//        return "result";
-//    }
 }

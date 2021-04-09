@@ -1,12 +1,10 @@
 package JpaApplication;
 
-import JpaApplication.Model.Answer;
-import JpaApplication.Model.OpenEnded;
-import JpaApplication.Model.Question;
-import JpaApplication.Model.Survey;
+import JpaApplication.Model.*;
 import JpaApplication.Repository.AnswerRepository;
 import JpaApplication.Repository.QuestionRepository;
 import JpaApplication.Repository.SurveyRepository;
+import JpaApplication.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,22 +21,30 @@ public class HandlingFormSubmissionApplication {
     }
 
     @Bean
-    CommandLineRunner runner(QuestionRepository repo, SurveyRepository repository) {
+    CommandLineRunner runner(AnswerRepository repo, UserRepository repository) {
         return args -> {
+//          Creating a question with answers
             Question quest = new Question("hi?");
             Answer ans1 = new Answer("this is the first answer");
             ans1.setQuestion(quest);
-            Answer ans2 = new Answer("this is the second answer");
+            Answer ans2 = new Answer("this is the first answer");
             ans2.setQuestion(quest);
+            quest.setQuestionType(new OpenEnded());
+
+//          Creating a survey with its question
             Survey surv = new Survey();
             surv.setName("name");
             quest.setSurvey(surv);
-            quest.setQuestionType(new OpenEnded());
-            repository.save(surv);
-//            System.out.println(repo.findById(1).getAnswers());
-            System.out.println(repository.findByName("name").getId());
-            Survey survey1 = repository.findByName("name");
-            System.out.println(repository.findByName("name").getQuestions());
+
+//          Creating a user with its question
+            User user = new User("hassan");
+            surv.setUser(user);
+
+            repository.save(user);
+//            System.out.println(repo.findByAnswerAndQuestion("this is the first answer", quest));
+//            System.out.println(repository.findByName("name").getId());
+//            Survey survey1 = repository.findByName("name");
+//            System.out.println(repository.findByName("name").getQuestions());
         };
     }
 

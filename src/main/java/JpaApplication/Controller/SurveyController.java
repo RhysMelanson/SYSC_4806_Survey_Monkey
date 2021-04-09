@@ -3,6 +3,7 @@ package JpaApplication.Controller;
 import JpaApplication.Model.*;
 import JpaApplication.Repository.QuestionRepository;
 import JpaApplication.Repository.SurveyRepository;
+import JpaApplication.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,18 +23,23 @@ public class SurveyController {
     @Autowired
     private SurveyRepository SurveyRepo;
 
+    @Autowired
+    private UserRepository UserRepo;
+
     @GetMapping("/Surveys")
-    public String SurveyList(Model model) {
+    public String SurveyList(@RequestParam(name="name", required=false, defaultValue="hassan") String username, Model model) {
 
-        Survey test = new Survey();
-        test.setName("How much work do you do?");
-        Survey test2 = new Survey();
-        test2.setName("What your favorite ice cream?");
+        User user = UserRepo.findByUserName(username);
 
-        SurveyRepo.save(test);
-        SurveyRepo.save(test2);
+//        Survey test = new Survey();
+//        test.setName("How much work do you do?");
+//        Survey test2 = new Survey();
+//        test2.setName("What your favorite ice cream?");
+//
+//        SurveyRepo.save(test);
+//        SurveyRepo.save(test2);
 
-        model.addAttribute("Surveys", SurveyRepo.findAll());
+        model.addAttribute("Surveys", user.getSurveys());
 
         return "Surveys";
     }

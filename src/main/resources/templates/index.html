@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Survey Monkey</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p>Add a question <a href="/addQuestion">here</a></p>
-<p>List all surveys <a href="/Surveys">here</a></p>
-<p>User Login and Account Creation<a href="/login">here</a></p>
+    <h1>Login</h1>
+    <form action="#" th:action="@{/}" th:object="${user}" method="post">
+        <p>Enter Username: <input type="text" th:field="*{userName}" /></p>
+        <p><input type="submit" value="Login" /> </p>
+    </form>
+    <p>Complete a survey as a guest</p>
 </body>
 </html>
