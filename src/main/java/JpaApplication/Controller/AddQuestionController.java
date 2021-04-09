@@ -30,6 +30,7 @@ public class AddQuestionController {
         surveyID = id;
         long ID = Long.parseLong(surveyID);
         Survey survey = SurveyRepo.findById(ID);
+        model.addAttribute("user", survey.getUser());
         model.addAttribute("questions", survey.getQuestions());
         model.addAttribute("question", new Question());
         model.addAttribute("openEnded", new OpenEnded());
@@ -51,6 +52,7 @@ public class AddQuestionController {
                                     Model model) {
         long ID = Long.parseLong(surveyID);
         Survey survey = SurveyRepo.findById(ID);
+        model.addAttribute("user", survey.getUser());
         model.addAttribute("question", question);
         switch (question.getRadioButtonSelectedValue()) {
             case "Open Ended Question":
