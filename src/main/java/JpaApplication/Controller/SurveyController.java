@@ -46,11 +46,15 @@ public class SurveyController {
         for(Survey s: Surveys){
             if(s.getUser() == user || s.getState()){
                 //then just add the if open statement
+                System.out.println(s.getUser().getUserName());
                 survs.add(s);
             }
         }
 
-        model.addAttribute("user", user);
+        System.out.println(user.getUserName());
+
+
+        model.addAttribute("user", user.getUserName());
         model.addAttribute("Surveys", survs);
 
         return "Surveys";
