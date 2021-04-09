@@ -30,15 +30,6 @@ public class SurveyController {
     public String SurveyList(@RequestParam(name="name", required=false, defaultValue="hassan") String username, Model model) {
 
         User user = UserRepo.findByUserName(username);
-
-//        Survey test = new Survey();
-//        test.setName("How much work do you do?");
-//        Survey test2 = new Survey();
-//        test2.setName("What your favorite ice cream?");
-//
-//        SurveyRepo.save(test);
-//        SurveyRepo.save(test2);
-
         model.addAttribute("Surveys", user.getSurveys());
 
         return "Surveys";
@@ -52,9 +43,6 @@ public class SurveyController {
 
         System.out.println(SurveyRepo.findAll());
         Survey ChosenSurvey = SurveyRepo.findById(ID);
-        //System.out.println(ChosenSurvey);
-       // System.out.println(ChosenSurvey.getName());
-        //System.out.println(ChosenSurvey.getId());
 
         Set<Question> quest = ChosenSurvey.getQuestions();
         System.out.println(quest);
@@ -73,8 +61,7 @@ public class SurveyController {
     public String addSurvey(@ModelAttribute Survey survey, Model model){
         model.addAttribute("survey", survey);
         SurveyRepo.save(survey);
-        System.out.println(SurveyRepo.findAll());
-        return "questionType";
+        //System.out.println(SurveyRepo.findAll());
+        return "addQuestion";
     }
-
 }
