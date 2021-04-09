@@ -8,6 +8,9 @@
 <body>
 <h1>Surveys</h1>
 <p><a href="/">To return to the HomePage click here</a></p>
+<form action="" th:action="@{/newSurvey(name=${Username})}">
+    <a th:href="@{/newSurvey(name=${Username})}"> To add a survey click here </a> <br/>
+</form>
 <table>
     <thead>
     <tr>

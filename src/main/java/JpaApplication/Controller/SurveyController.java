@@ -26,19 +26,13 @@ public class SurveyController {
     @Autowired
     private UserRepository UserRepo;
 
+    private String uniqueUser = "";
+
     @GetMapping("/Surveys")
     public String SurveyList(@RequestParam(name="name", required=false, defaultValue="hassan") String username, Model model) {
 
         User user = UserRepo.findByUserName(username);
-
-//        Survey test = new Survey();
-//        test.setName("How much work do you do?");
-//        Survey test2 = new Survey();
-//        test2.setName("What your favorite ice cream?");
-//
-//        SurveyRepo.save(test);
-//        SurveyRepo.save(test2);
-
+        model.addAttribute("Username", user.getUserName());
         model.addAttribute("Surveys", user.getSurveys());
 
         return "Surveys";
@@ -65,17 +59,19 @@ public class SurveyController {
     }
 
     @GetMapping("/newSurvey")
-    public String addSurvey(Model model){
+    public String addSurvey(@RequestParam(name="name", required=false, defaultValue="hassan") String username, Model model){
+        uniqueUser = username;
         model.addAttribute("survey", new Survey());
         return "newSurvey";
     }
 
     @PostMapping("/newSurvey")
     public String addSurvey(@ModelAttribute Survey survey, Model model){
+        User user = UserRepo.findByUserName(uniqueUser);
         model.addAttribute("survey", survey);
-        SurveyRepo.save(survey);
-        System.out.println(SurveyRepo.findAll());
-        return "questionType";
+        survey.setUser(user);
+        UserRepo.save(user);
+        return "redirect:/Surveys?name=" + uniqueUser;
     }
 
 }
