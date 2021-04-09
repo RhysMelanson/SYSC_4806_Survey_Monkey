@@ -65,6 +65,7 @@ public class Question {
 
     public void setQuestionType(QuestionType questionType) {
         this.questionType = questionType;
+        radioButtonSelectedValue = questionType.toString();
     }
 
     public long getId() {

@@ -30,6 +30,15 @@ public class SurveyController {
     public String SurveyList(@RequestParam(name="name", required=false, defaultValue="hassan") String username, Model model) {
 
         User user = UserRepo.findByUserName(username);
+
+//        Survey test = new Survey();
+//        test.setName("How much work do you do?");
+//        Survey test2 = new Survey();
+//        test2.setName("What your favorite ice cream?");
+//
+//        SurveyRepo.save(test);
+//        SurveyRepo.save(test2);
+
         model.addAttribute("Surveys", user.getSurveys());
 
         return "Surveys";
@@ -38,17 +47,19 @@ public class SurveyController {
 
     @GetMapping("/ViewAnswers")
     public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
-        //System.out.println(id);
         long ID = Long.parseLong(id);
-
-        System.out.println(SurveyRepo.findAll());
-        Survey ChosenSurvey = SurveyRepo.findById(ID);
-
-        Set<Question> quest = ChosenSurvey.getQuestions();
-        System.out.println(quest);
-        model.addAttribute("Questions", quest);
-
-        return "ViewAnswers";
+        Question ChosenQuestion = QuestionRepo.findById(ID);
+        model.addAttribute("Survey", ChosenQuestion.getSurvey());
+        model.addAttribute("Answers", ChosenQuestion.getAnswers());
+        switch (ChosenQuestion.getRadioButtonSelectedValue()) {
+            case "Open Ended Question":
+                return "ViewOpenEndedAnswers";
+            case "Multiple Choice Question":
+                return "ViewMultipleChoiceAnswers";
+            case "Range of Number Question":
+                return "ViewNumberRangeAnswers";
+        }
+        return "ViewOpenEndedAnswers";
     }
 
     @GetMapping("/newSurvey")
@@ -61,7 +72,8 @@ public class SurveyController {
     public String addSurvey(@ModelAttribute Survey survey, Model model){
         model.addAttribute("survey", survey);
         SurveyRepo.save(survey);
-        //System.out.println(SurveyRepo.findAll());
-        return "addQuestion";
+        System.out.println(SurveyRepo.findAll());
+        return "questionType";
     }
+
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Answers</h1>
+<form action="" th:action="@{/addQuestion(id=${Survey.id})}">
+    <a th:href="@{/addQuestion(id=${Survey.id})}"> To return to the Survey click here </a> <br/>
+</form>
+<p><a href="/">To return to the HomePage click here</a></p>
+<table>
+    <thead>
+    <tr>
+        <th> Answers </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${Answers.empty}">
+        <td colspan="2"> No Answers Available </td>
+    </tr>
+    <tr th:each="Answer : ${Answers}">
+        <td><span th:text="${Answer.answer}"> Answer </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
