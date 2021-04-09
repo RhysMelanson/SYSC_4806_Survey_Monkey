@@ -25,6 +25,8 @@ public class Survey {
     @JsonBackReference
     private User user;
 
+    private boolean state = true;
+
     public Survey() {
         questions = new HashSet<Question>();
     }
@@ -73,6 +75,14 @@ public class Survey {
     public void setUser(User user) {
         this.user = user;
         user.addSurvey(this);
+    }
+
+    public boolean getState(){
+        return state;
+    }
+
+    public void setState(boolean open){
+        this.state = open;
     }
 
     @Override

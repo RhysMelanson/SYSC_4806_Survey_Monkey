@@ -38,6 +38,13 @@ public class SurveyController {
         return "Surveys";
     }
 
+    @GetMapping("/completeSurvey")
+    public String guestSurveyList(Model model) {
+        model.addAttribute("Surveys", SurveyRepo.findAll());
+
+        return "completeSurvey";
+    }
+
 
     @GetMapping("/ViewAnswers")
     public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
