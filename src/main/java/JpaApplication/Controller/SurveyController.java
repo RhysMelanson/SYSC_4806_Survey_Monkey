@@ -46,10 +46,10 @@ public class SurveyController {
 
 
         for(Survey s: Surveys){
-            System.out.println(s.getState());
+
             if(s.getUser() == user || s.getState() == true){
                 //then just add the if open statement
-                System.out.println(s.getUser().getUserName());
+                
                 survs.add(s);
             }
         }
@@ -90,7 +90,7 @@ public class SurveyController {
         Survey surv = SurveyRepo.findById(ID);
         surv.setState(false);
         SurveyRepo.save(surv);
-        System.out.println("team" + SurveyRepo.findById(ID).getState());
+
 
         model.addAttribute("survey", new Survey());
         return "newSurvey";
