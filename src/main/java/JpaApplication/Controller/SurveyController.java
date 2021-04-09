@@ -52,11 +52,13 @@ public class SurveyController {
         model.addAttribute("Survey", ChosenQuestion.getSurvey());
         model.addAttribute("Answers", ChosenQuestion.getAnswers());
         switch (ChosenQuestion.getRadioButtonSelectedValue()) {
-            case "Open Ended Question":
+            case "Open-Ended Question":
                 return "ViewOpenEndedAnswers";
-            case "Multiple Choice Question":
-                return "ViewMultipleChoiceAnswers";
-            case "Range of Number Question":
+            case "Multiple-Choice Question":
+                model.addAttribute("MultipleChoice", ChosenQuestion.getQuestionType());
+                model.addAttribute("question", ChosenQuestion);
+                return "pieChart";
+            case "Number-range Question":
                 return "ViewNumberRangeAnswers";
         }
         return "ViewOpenEndedAnswers";

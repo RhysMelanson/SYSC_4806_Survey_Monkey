@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>PieChart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:src="@{/js/pieChart.js}"></script>
 </head>
 <body>
 <h1>Answers</h1>
@@ -11,20 +14,6 @@
     <a th:href="@{/addQuestion(id=${Survey.id})}"> To return to the Survey click here </a> <br/>
 </form>
 <p><a href="/">To return to the HomePage click here</a></p>
-<table>
-    <thead>
-    <tr>
-        <th> Answers </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${Answers.empty}">
-        <td colspan="2"> No Answers Available </td>
-    </tr>
-    <tr th:each="Answer : ${Answers}">
-        <td><span th:text="${Answer.answer}"> Answer </span></td>
-    </tr>
-    </tbody>
-</table>
+<div id="answerSpread"></div>
 </body>
 </html>

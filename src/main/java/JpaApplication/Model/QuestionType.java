@@ -1,4 +1,6 @@
 package JpaApplication.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public abstract class QuestionType {
     protected long id;
 
     @OneToOne
+    @JsonBackReference
     protected Question question;
 
     protected TypeOfQuestion type = TypeOfQuestion.OpenEnded;
@@ -48,6 +51,14 @@ public abstract class QuestionType {
 
     public void setType(TypeOfQuestion type) {
         this.type = type;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override

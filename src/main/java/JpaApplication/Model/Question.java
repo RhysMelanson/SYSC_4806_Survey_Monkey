@@ -19,6 +19,7 @@ public class Question {
     private int answersCount = 0;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")
+    @JsonManagedReference
     private QuestionType questionType;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "question")

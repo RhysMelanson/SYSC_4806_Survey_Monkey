@@ -25,11 +25,26 @@ public class HandlingFormSubmissionApplication {
         return args -> {
 //          Creating a question with answers
             Question quest = new Question("hi?");
-            Answer ans1 = new Answer("this is the first answer");
-            ans1.setQuestion(quest);
-            Answer ans2 = new Answer("this is the first answer");
-            ans2.setQuestion(quest);
-            quest.setQuestionType(new OpenEnded());
+            MultipleChoice qt = new MultipleChoice();
+            qt.setAnswer1("First Answer");
+            qt.setAnswer2("Second Answer");
+            qt.setAnswer3("Third Answer");
+            qt.setAnswer4("Fourth Answer");
+            qt.setQuestion(quest);
+            quest.setQuestionType(qt);
+            System.out.println(quest.getRadioButtonSelectedValue());
+            for (int i = 0; i < 20; i++) {
+                Answer ans1 = new Answer("First Answer");
+                ans1.setQuestion(quest);
+                Answer ans2 = new Answer("Second Answer");
+                ans2.setQuestion(quest);
+                Answer ans3 = new Answer("Third Answer");
+                ans3.setQuestion(quest);
+                Answer ans4 = new Answer("Fourth Answer");
+                ans4.setQuestion(quest);
+            }
+
+
 
 //          Creating a survey with its question
             Survey surv = new Survey();
