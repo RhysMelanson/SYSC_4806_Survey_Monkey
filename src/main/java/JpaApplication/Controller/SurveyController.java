@@ -47,20 +47,19 @@ public class SurveyController {
 
     @GetMapping("/ViewAnswers")
     public String ViewAnswer(@RequestParam(name="id", required=false, defaultValue="1") String id, Model model) {
-        //System.out.println(id);
         long ID = Long.parseLong(id);
-
-        System.out.println(SurveyRepo.findAll());
-        Survey ChosenSurvey = SurveyRepo.findById(ID);
-        //System.out.println(ChosenSurvey);
-       // System.out.println(ChosenSurvey.getName());
-        //System.out.println(ChosenSurvey.getId());
-
-        Set<Question> quest = ChosenSurvey.getQuestions();
-        System.out.println(quest);
-        model.addAttribute("Questions", quest);
-
-        return "ViewAnswers";
+        Question ChosenQuestion = QuestionRepo.findById(ID);
+        model.addAttribute("Survey", ChosenQuestion.getSurvey());
+        model.addAttribute("Answers", ChosenQuestion.getAnswers());
+        switch (ChosenQuestion.getRadioButtonSelectedValue()) {
+            case "Open Ended Question":
+                return "ViewOpenEndedAnswers";
+            case "Multiple Choice Question":
+                return "ViewMultipleChoiceAnswers";
+            case "Range of Number Question":
+                return "ViewNumberRangeAnswers";
+        }
+        return "ViewOpenEndedAnswers";
     }
 
     @GetMapping("/newSurvey")
