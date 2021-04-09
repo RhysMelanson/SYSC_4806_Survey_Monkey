@@ -1,6 +1,7 @@
 package JpaApplication.Model;
 
 import JpaApplication.Model.Question;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,6 +20,10 @@ public class Survey {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "survey")
     @JsonManagedReference
     private Set<Question> questions;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JsonBackReference
+    private User user;
 
     public Survey() {
         questions = new HashSet<Question>();
@@ -59,6 +64,15 @@ public class Survey {
 
     public void removeQuestionInfo(Question question) {
         questions.remove(question);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        user.addSurvey(this);
     }
 
     @Override
